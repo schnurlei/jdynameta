@@ -1,0 +1,134 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>de.jdynameta</groupId>
+        <artifactId>jdy</artifactId>
+        <version>0.8.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>jdy.model.persistence</artifactId>
+    <name>JDY Model: Persistence</name>
+    <description>JDynaMeta Persistence layer above dbaccess</description>
+    <dependencies>
+        <dependency>
+            <groupId>de.jdynameta</groupId>
+            <artifactId>jdy.base</artifactId>
+            <version> ${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>de.jdynameta</groupId>
+            <artifactId>jdy.base.test</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+       <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+
+    <build>
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.18</version>
+                <configuration>
+                    <testFailureIgnore>true</testFailureIgnore>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>com.mycila.maven-license-plugin</groupId>
+                <artifactId>maven-license-plugin</artifactId>
+                <version>1.9.0</version>
+                <configuration>
+                    <includes>
+                        <include>**/src/**</include>
+                        <include>**/test/**</include>
+                    </includes>
+                    <strictCheck>true</strictCheck>					
+                    <excludes>
+                        <exclude>build/**</exclude>
+                        <exclude>**/src/test/java/org/**</exclude>
+                        <exclude>**/documentation/**</exclude>
+                        <exclude>**/*.html</exclude>
+                        <exclude>**/*.zargo</exclude>
+                        <exclude>**/*.properties</exclude>
+                        <exclude>**/*.css</exclude>
+                        <exclude>**/*.png</exclude>
+                        <exclude>**/*.txt</exclude>
+                    </excludes>
+                    <useDefaultExcludes>true</useDefaultExcludes>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.3.1</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                            <mainClass>de.jdynameta.persistence.VersionInformation</mainClass>
+                        </manifest>
+                        <manifestEntries>
+                            <Build-Date>${maven.build.timestamp}</Build-Date>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+
+        </plugins>
+
+        <extensions>
+            <extension>
+                <groupId>org.jvnet.wagon-svn</groupId>
+                <artifactId>wagon-svn</artifactId>
+                <version>1.9</version>
+            </extension>
+        </extensions>
+
+    </build>
+
+    <repositories>
+        <repository>
+            <id>java-net-repo</id>
+            <name>Java.net Repository</name>
+            <url>http://download.java.net/maven/2</url>
+        </repository>
+        <repository>
+            <id>maven2-repository.dynameta.googlecode.com</id>
+            <name>JDynameta Maven Repository</name>
+            <url>https://jdynameta.googlecode.com/svn/repo</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>mc-release</id>
+            <name>Local Maven repository of releases</name>
+            <url>http://mc-repo.googlecode.com/svn/maven2/releases</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <distributionManagement>
+        <repository>
+            <uniqueVersion>true</uniqueVersion>
+            <name>JDynameta Maven Repository</name>
+            <id>maven2-repository.dynameta.googlecode.com</id>
+            <url>svn:https://jdynameta.googlecode.com/svn/repo</url>
+        </repository>
+    </distributionManagement>
+</project>

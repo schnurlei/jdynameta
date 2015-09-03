@@ -1,0 +1,113 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>de.jdynameta</groupId>
+        <artifactId>jdy</artifactId>
+        <version>0.8.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>jdy.model.groovy</artifactId>
+    <name>JDY Model: Groovy</name>
+  
+    <dependencies>
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy</artifactId>
+            <version>2.3.7</version>
+        </dependency>
+        <dependency>
+            <groupId>de.jdynameta</groupId>
+            <artifactId>jdy.base</artifactId>
+            <version>0.8.0-SNAPSHOT</version>
+        </dependency>
+		
+    </dependencies>
+	 
+    <build>
+        <plugins>
+			
+            <plugin>
+                <groupId>com.mycila.maven-license-plugin</groupId>
+                <artifactId>maven-license-plugin</artifactId>
+                <version>1.9.0</version>
+                <configuration>
+                    <includes>
+                        <include>**/src/**</include>
+                        <include>**/test/**</include>
+                    </includes>
+                    <strictCheck>true</strictCheck>					
+                    <excludes>
+                        <exclude>build/**</exclude>
+                        <exclude>**/documentation/**</exclude>
+                        <exclude>**/*.html</exclude>
+                        <exclude>**/*.zargo</exclude>
+                        <exclude>**/*.properties</exclude>
+                        <exclude>**/*.css</exclude>					
+                        <exclude>**/*.txt</exclude>
+                        <exclude>**/*.groovy</exclude>
+                    </excludes>
+                    <useDefaultExcludes>true</useDefaultExcludes>
+                </configuration>
+            </plugin>
+	
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.3.1</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                            <mainClass>de.jdynameta.groovy.VersionInformation</mainClass>
+                        </manifest>
+                        <manifestEntries>
+                            <Build-Date>${maven.build.timestamp}</Build-Date>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+		
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.18</version>
+            </plugin>
+			
+        </plugins>
+		
+        <extensions>
+            <extension>
+                <groupId>org.jvnet.wagon-svn</groupId>
+                <artifactId>wagon-svn</artifactId>
+                <version>1.9</version>
+            </extension>
+        </extensions>
+		
+    </build> 
+	 
+    <distributionManagement>
+        <repository>
+            <uniqueVersion>true</uniqueVersion>
+            <name>JDynameta Maven Repository</name>
+            <id>maven2-repository.dynameta.googlecode.com</id>
+            <url>svn:https://jdynameta.googlecode.com/svn/repo</url>
+        </repository>
+    </distributionManagement>
+
+	 
+    <pluginRepositories>
+        <pluginRepository>
+            <id>mc-release</id>
+            <name>Local Maven repository of releases</name>
+            <url>http://mc-repo.googlecode.com/svn/maven2/releases</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </pluginRepository>
+    </pluginRepositories>
+	 
+ 	 
+</project>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "http://www.eclipse.org/jetty/configure.dtd">
+ 
+<Configure id="wac" class="org.eclipse.jetty.webapp.WebAppContext">
+	<New id="mydb" class="org.eclipse.jetty.plus.jndi.Resource">
+	<Arg></Arg>
+	<Arg>jdbc/jdynametadb</Arg>
+	<Arg>			
+		<New class="org.hsqldb.jdbc.JDBCDataSource">
+			<!--Set name="Database">jdbc:hsqldb:file:/home/rainer/projects/db/testdb</Set-->
+			<Set name="database">jdbc:hsqldb:hsql://localhost/JDynaMeta</Set>
+			<Set name="User">sa</Set>
+			<Set name="Password">sa</Set>
+		</New>
+	</Arg>
+	</New>
+</Configure>
+

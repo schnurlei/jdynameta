@@ -1,0 +1,487 @@
+[ {
+  "@namespace" : "ApplicationRepository",
+  "@classInternalName" : "AppRepository",
+  "@persistence" : "READ",
+  "Name" : "SimpleRepository",
+  "applicationName" : "SimpleRepository",
+  "Classes" : [ {
+    "@namespace" : "ApplicationRepository",
+    "@classInternalName" : "AppClassInfo",
+    "@persistence" : "READ",
+    "Name" : "Company",
+    "InternalName" : "Company",
+    "isAbstract" : false,
+    "NameSpace" : null,
+    "beforeSaveScript" : null,
+    "Superclass" : null,
+    "Repository" : {
+      "@namespace" : "ApplicationRepository",
+      "@classInternalName" : "AppRepository",
+      "@persistence" : "PROXY",
+      "applicationName" : "SimpleRepository"
+    },
+    "Attributes" : [ {
+      "@namespace" : "ApplicationRepository",
+      "@classInternalName" : "AppLongType",
+      "@persistence" : "READ",
+      "Name" : "CompanyId",
+      "InternalName" : "CompanyId",
+      "isKey" : true,
+      "isNotNull" : true,
+      "isGenerated" : false,
+      "AttrGroup" : null,
+      "pos" : 0,
+      "DomainValues" : [],
+      "Masterclass" : {
+        "@namespace" : "ApplicationRepository",
+        "@classInternalName" : "AppClassInfo",
+        "@persistence" : "PROXY",
+        "InternalName" : "Company",
+        "Repository" : {
+          "@namespace" : "ApplicationRepository",
+          "@classInternalName" : "AppRepository",
+          "@persistence" : "PROXY",
+          "applicationName" : "SimpleRepository"
+        }
+      },
+      "MinValue" : 0,
+      "MaxValue" : 2147483647
+    }, {
+      "@namespace" : "ApplicationRepository",
+      "@classInternalName" : "AppTextType",
+      "@persistence" : "READ",
+      "Name" : "CompanyName",
+      "InternalName" : "CompanyName",
+      "isKey" : true,
+      "isNotNull" : true,
+      "isGenerated" : false,
+      "AttrGroup" : null,
+      "pos" : 1,
+      "DomainValues" : [],
+      "Masterclass" : {
+        "@namespace" : "ApplicationRepository",
+        "@classInternalName" : "AppClassInfo",
+        "@persistence" : "PROXY",
+        "InternalName" : "Company",
+        "Repository" : {
+          "@namespace" : "ApplicationRepository",
+          "@classInternalName" : "AppRepository",
+          "@persistence" : "PROXY",
+          "applicationName" : "SimpleRepository"
+        }
+      },
+      "length" : 1000,
+      "typeHint" : null
+    }],
+    "Associations" : [ ],
+    "Subclasses" : [ ]
+  }, {
+    "@namespace" : "ApplicationRepository",
+    "@classInternalName" : "AppClassInfo",
+    "@persistence" : "READ",
+    "Name" : "Contact",
+    "InternalName" : "Contact",
+    "isAbstract" : false,
+    "NameSpace" : null,
+    "beforeSaveScript" : null,
+    "Superclass" : null,
+    "Repository" : {
+      "@namespace" : "ApplicationRepository",
+      "@classInternalName" : "AppRepository",
+      "@persistence" : "PROXY",
+      "applicationName" : "SimpleRepository"
+    },
+    "Attributes" : [  {
+      "@namespace" : "ApplicationRepository",
+      "@classInternalName" : "AppObjectReference",
+      "@persistence" : "READ",
+      "Name" : "Company",
+      "InternalName" : "Company",
+      "isKey" : false,
+      "isNotNull" : false,
+      "isGenerated" : false,
+      "AttrGroup" : null,
+      "pos" : 3,
+      "Masterclass" : {
+        "@namespace" : "ApplicationRepository",
+        "@classInternalName" : "AppClassInfo",
+        "@persistence" : "PROXY",
+        "InternalName" : "Contact",
+        "Repository" : {
+          "@namespace" : "ApplicationRepository",
+          "@classInternalName" : "AppRepository",
+          "@persistence" : "PROXY",
+          "applicationName" : "SimpleRepository"
+        }
+      },
+      "referencedClass" : {
+        "@namespace" : "ApplicationRepository",
+        "@classInternalName" : "AppClassInfo",
+        "@persistence" : "PROXY",
+        "InternalName" : "Company",
+        "Repository" : {
+          "@namespace" : "ApplicationRepository",
+          "@classInternalName" : "AppRepository",
+          "@persistence" : "PROXY",
+          "applicationName" : "SimpleRepository"
+        }
+      },
+      "isInAssociation" : false,
+      "isDependent" : false
+    } ],
+    "Associations" : [ ],
+    "Subclasses" : [ ]
+  }, {
+    "@namespace" : "ApplicationRepository",
+    "@classInternalName" : "AppClassInfo",
+    "@persistence" : "READ",
+    "Name" : "Employee",
+    "InternalName" : "Employee",
+    "isAbstract" : false,
+    "NameSpace" : null,
+    "beforeSaveScript" : null,
+    "Superclass" : null,
+    "Repository" : {
+      "@namespace" : "ApplicationRepository",
+      "@classInternalName" : "AppRepository",
+      "@persistence" : "PROXY",
+      "applicationName" : "SimpleRepository"
+    },
+    "Attributes" : [ {
+      "@namespace" : "ApplicationRepository",
+      "@classInternalName" : "AppLongType",
+      "@persistence" : "READ",
+      "Name" : "EmployeeId",
+      "InternalName" : "EmployeeId",
+      "isKey" : true,
+      "isNotNull" : true,
+      "isGenerated" : false,
+      "AttrGroup" : null,
+      "pos" : 0,
+      "DomainValues" : [],
+      "Masterclass" : {
+        "@namespace" : "ApplicationRepository",
+        "@classInternalName" : "AppClassInfo",
+        "@persistence" : "PROXY",
+        "InternalName" : "Employee",
+        "Repository" : {
+          "@namespace" : "ApplicationRepository",
+          "@classInternalName" : "AppRepository",
+          "@persistence" : "PROXY",
+          "applicationName" : "SimpleRepository"
+        }
+      },
+      "MinValue" : 0,
+      "MaxValue" : 2147483647
+    }, {
+      "@namespace" : "ApplicationRepository",
+      "@classInternalName" : "AppTextType",
+      "@persistence" : "READ",
+      "Name" : "EmployeeName",
+      "InternalName" : "EmployeeName",
+      "isKey" : false,
+      "isNotNull" : true,
+      "isGenerated" : false,
+      "AttrGroup" : null,
+      "pos" : 1,
+      "DomainValues" : [],
+      "Masterclass" : {
+        "@namespace" : "ApplicationRepository",
+        "@classInternalName" : "AppClassInfo",
+        "@persistence" : "PROXY",
+        "InternalName" : "Employee",
+        "Repository" : {
+          "@namespace" : "ApplicationRepository",
+          "@classInternalName" : "AppRepository",
+          "@persistence" : "PROXY",
+          "applicationName" : "SimpleRepository"
+        }
+      },
+      "length" : 1000,
+      "typeHint" : null
+    }, {
+      "@namespace" : "ApplicationRepository",
+      "@classInternalName" : "AppObjectReference",
+      "@persistence" : "READ",
+      "Name" : "Company",
+      "InternalName" : "Company",
+      "isKey" : false,
+      "isNotNull" : true,
+      "isGenerated" : false,
+      "AttrGroup" : null,
+      "pos" : 2,
+      "Masterclass" : {
+        "@namespace" : "ApplicationRepository",
+        "@classInternalName" : "AppClassInfo",
+        "@persistence" : "PROXY",
+        "InternalName" : "Employee",
+        "Repository" : {
+          "@namespace" : "ApplicationRepository",
+          "@classInternalName" : "AppRepository",
+          "@persistence" : "PROXY",
+          "applicationName" : "SimpleRepository"
+        }
+      },
+      "referencedClass" : {
+        "@namespace" : "ApplicationRepository",
+        "@classInternalName" : "AppClassInfo",
+        "@persistence" : "PROXY",
+        "InternalName" : "Company",
+        "Repository" : {
+          "@namespace" : "ApplicationRepository",
+          "@classInternalName" : "AppRepository",
+          "@persistence" : "PROXY",
+          "applicationName" : "SimpleRepository"
+        }
+      },
+      "isInAssociation" : false,
+      "isDependent" : false
+    } ],
+    "Associations" : [ ],
+    "Subclasses" : [ {
+      "@namespace" : "ApplicationRepository",
+      "@classInternalName" : "AppClassInfo",
+      "@persistence" : "READ",
+      "Name" : "ChiefEmployee",
+      "InternalName" : "ChiefEmployee",
+      "isAbstract" : false,
+      "NameSpace" : null,
+      "beforeSaveScript" : null,
+      "Superclass" : {
+        "@namespace" : "ApplicationRepository",
+        "@classInternalName" : "AppClassInfo",
+        "@persistence" : "PROXY",
+        "InternalName" : "Employee",
+        "Repository" : {
+          "@namespace" : "ApplicationRepository",
+          "@classInternalName" : "AppRepository",
+          "@persistence" : "PROXY",
+          "applicationName" : "SimpleRepository"
+        }
+      },
+      "Repository" : {
+        "@namespace" : "ApplicationRepository",
+        "@classInternalName" : "AppRepository",
+        "@persistence" : "PROXY",
+        "applicationName" : "SimpleRepository"
+      },
+      "Attributes" : [ {
+        "@namespace" : "ApplicationRepository",
+        "@classInternalName" : "AppLongType",
+        "@persistence" : "READ",
+        "Name" : "Bonus",
+        "InternalName" : "Bonus",
+        "isKey" : false,
+        "isNotNull" : false,
+        "isGenerated" : false,
+        "AttrGroup" : null,
+        "pos" : 0,
+        "DomainValues" : [],
+        "Masterclass" : {
+          "@namespace" : "ApplicationRepository",
+          "@classInternalName" : "AppClassInfo",
+          "@persistence" : "PROXY",
+          "InternalName" : "ChiefEmployee",
+          "Repository" : {
+            "@namespace" : "ApplicationRepository",
+            "@classInternalName" : "AppRepository",
+            "@persistence" : "PROXY",
+            "applicationName" : "SimpleRepository"
+          }
+        },
+        "MinValue" : 0,
+        "MaxValue" : 2147483647
+      }, {
+        "@namespace" : "ApplicationRepository",
+        "@classInternalName" : "AppTimestampType",
+        "@persistence" : "READ",
+        "Name" : "BonusDate",
+        "InternalName" : "BonusDate",
+        "isKey" : false,
+        "isNotNull" : false,
+        "isGenerated" : false,
+        "AttrGroup" : null,
+        "pos" : 1,
+        "Masterclass" : {
+          "@namespace" : "ApplicationRepository",
+          "@classInternalName" : "AppClassInfo",
+          "@persistence" : "PROXY",
+          "InternalName" : "ChiefEmployee",
+          "Repository" : {
+            "@namespace" : "ApplicationRepository",
+            "@classInternalName" : "AppRepository",
+            "@persistence" : "PROXY",
+            "applicationName" : "SimpleRepository"
+          }
+        },
+        "isDatePartUsed" : true,
+        "isTimePartUsed" : false
+      } ],
+      "Associations" : [ ],
+      "Subclasses" : [ ]
+    } ]
+  }, {
+    "@namespace" : "ApplicationRepository",
+    "@classInternalName" : "AppClassInfo",
+    "@persistence" : "READ",
+    "Name" : "ReferenceInPrimaryKey",
+    "InternalName" : "ReferenceInPrimaryKey",
+    "isAbstract" : false,
+    "NameSpace" : null,
+    "beforeSaveScript" : null,
+    "Superclass" : null,
+    "Repository" : {
+      "@namespace" : "ApplicationRepository",
+      "@classInternalName" : "AppRepository",
+      "@persistence" : "PROXY",
+      "applicationName" : "SimpleRepository"
+    },
+    "Attributes" : [ {
+      "@namespace" : "ApplicationRepository",
+      "@classInternalName" : "AppObjectReference",
+      "@persistence" : "READ",
+      "Name" : "Company",
+      "InternalName" : "Company",
+      "isKey" : true,
+      "isNotNull" : true,
+      "isGenerated" : false,
+      "AttrGroup" : null,
+      "pos" : 0,
+      "Masterclass" : {
+        "@namespace" : "ApplicationRepository",
+        "@classInternalName" : "AppClassInfo",
+        "@persistence" : "PROXY",
+        "InternalName" : "ReferenceInPrimaryKey",
+        "Repository" : {
+          "@namespace" : "ApplicationRepository",
+          "@classInternalName" : "AppRepository",
+          "@persistence" : "PROXY",
+          "applicationName" : "SimpleRepository"
+        }
+      },
+      "referencedClass" : {
+        "@namespace" : "ApplicationRepository",
+        "@classInternalName" : "AppClassInfo",
+        "@persistence" : "PROXY",
+        "InternalName" : "Company",
+        "Repository" : {
+          "@namespace" : "ApplicationRepository",
+          "@classInternalName" : "AppRepository",
+          "@persistence" : "PROXY",
+          "applicationName" : "SimpleRepository"
+        }
+      },
+      "isInAssociation" : false,
+      "isDependent" : false
+    }, {
+      "@namespace" : "ApplicationRepository",
+      "@classInternalName" : "AppTextType",
+      "@persistence" : "READ",
+      "Name" : "Value1",
+      "InternalName" : "Value1",
+      "isKey" : false,
+      "isNotNull" : false,
+      "isGenerated" : false,
+      "AttrGroup" : null,
+      "pos" : 1,
+      "DomainValues" : [],
+      "Masterclass" : {
+        "@namespace" : "ApplicationRepository",
+        "@classInternalName" : "AppClassInfo",
+        "@persistence" : "PROXY",
+        "InternalName" : "ReferenceInPrimaryKey",
+        "Repository" : {
+          "@namespace" : "ApplicationRepository",
+          "@classInternalName" : "AppRepository",
+          "@persistence" : "PROXY",
+          "applicationName" : "SimpleRepository"
+        }
+      },
+      "length" : 1000,
+      "typeHint" : null
+    } ],
+    "Associations" : [ ],
+    "Subclasses" : [ ]
+  }, {
+    "@namespace" : "ApplicationRepository",
+    "@classInternalName" : "AppClassInfo",
+    "@persistence" : "READ",
+    "Name" : "ChiefEmployee",
+    "InternalName" : "ChiefEmployee",
+    "isAbstract" : false,
+    "NameSpace" : null,
+    "beforeSaveScript" : null,
+    "Superclass" : {
+      "@namespace" : "ApplicationRepository",
+      "@classInternalName" : "AppClassInfo",
+      "@persistence" : "PROXY",
+      "InternalName" : "Employee",
+      "Repository" : {
+        "@namespace" : "ApplicationRepository",
+        "@classInternalName" : "AppRepository",
+        "@persistence" : "PROXY",
+        "applicationName" : "SimpleRepository"
+      }
+    },
+    "Repository" : {
+      "@namespace" : "ApplicationRepository",
+      "@classInternalName" : "AppRepository",
+      "@persistence" : "PROXY",
+      "applicationName" : "SimpleRepository"
+    },
+    "Attributes" : [ {
+      "@namespace" : "ApplicationRepository",
+      "@classInternalName" : "AppLongType",
+      "@persistence" : "READ",
+      "Name" : "Bonus",
+      "InternalName" : "Bonus",
+      "isKey" : false,
+      "isNotNull" : false,
+      "isGenerated" : false,
+      "AttrGroup" : null,
+      "pos" : 0,
+      "DomainValues" : [],
+      "Masterclass" : {
+        "@namespace" : "ApplicationRepository",
+        "@classInternalName" : "AppClassInfo",
+        "@persistence" : "PROXY",
+        "InternalName" : "ChiefEmployee",
+        "Repository" : {
+          "@namespace" : "ApplicationRepository",
+          "@classInternalName" : "AppRepository",
+          "@persistence" : "PROXY",
+          "applicationName" : "SimpleRepository"
+        }
+      },
+      "MinValue" : 0,
+      "MaxValue" : 2147483647
+    }, {
+      "@namespace" : "ApplicationRepository",
+      "@classInternalName" : "AppTimestampType",
+      "@persistence" : "READ",
+      "Name" : "BonusDate",
+      "InternalName" : "BonusDate",
+      "isKey" : false,
+      "isNotNull" : false,
+      "isGenerated" : false,
+      "AttrGroup" : null,
+      "pos" : 1,
+      "Masterclass" : {
+        "@namespace" : "ApplicationRepository",
+        "@classInternalName" : "AppClassInfo",
+        "@persistence" : "PROXY",
+        "InternalName" : "ChiefEmployee",
+        "Repository" : {
+          "@namespace" : "ApplicationRepository",
+          "@classInternalName" : "AppRepository",
+          "@persistence" : "PROXY",
+          "applicationName" : "SimpleRepository"
+        }
+      },
+      "isDatePartUsed" : true,
+      "isTimePartUsed" : false
+    } ],
+    "Associations" : [ ],
+    "Subclasses" : [ ]
+  } ]
+} ]

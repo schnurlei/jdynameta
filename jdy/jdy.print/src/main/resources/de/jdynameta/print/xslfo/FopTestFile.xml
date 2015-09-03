@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+
+
+    Copyright 2011 (C) Rainer Schneider,Roggenburg <schnurlei@googlemail.com>
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+
+	<fo:layout-master-set>
+		<fo:simple-page-master master-name="A4"
+			page-width="297mm" page-height="210mm" margin-top="1cm"
+			margin-bottom="1cm" margin-left="10mm" margin-right="10mm">
+			<fo:region-body margin="2cm" />
+			<fo:region-before region-name="header-region"
+				extent="2cm" />
+			<fo:region-after extent="2cm" />
+			<fo:region-start extent="2cm" />
+			<fo:region-end extent="2cm" />
+		</fo:simple-page-master>
+	</fo:layout-master-set>
+
+	<fo:page-sequence master-reference="A4">
+
+  	<fo:static-content flow-name="header-region" border-bottom-style="solid" border-bottom-width="1pt" border-bottom-color="rgb(192,192,192)" font-size="10pt" font-family="Helvetica">
+			<fo:table color="rgb(105,105,105)" font-size="10pt" width="247mm">
+				<fo:table-column column-number="1" column-width="25%" />
+				<fo:table-column column-number="2" column-width="50%" />
+				<fo:table-column column-number="3" column-width="25%" />
+				<fo:table-body>
+					<fo:table-row border-bottom-style="solid" border-bottom-width="1pt" border-bottom-color="rgb(192,192,192)" >
+						<fo:table-cell column-number="1" display-align="after">
+							<fo:block> JDynameta </fo:block>
+						</fo:table-cell>
+						<fo:table-cell column-number="2" display-align="after">
+							<fo:block>
+								<fo:retrieve-marker retrieve-class-name="Ueberschrift-Ebene1"
+									retrieve-position="first-including-carryover"
+									retrieve-boundary="page-sequence" />
+							</fo:block>
+						</fo:table-cell>
+						<fo:table-cell column-number="3" display-align="after">
+							<fo:block text-align="right">
+					        <fo:inline font-size="10pt" font-weight="normal">
+					          Page <fo:page-number/> of <fo:page-number-citation ref-id="theEnd"/>
+					        </fo:inline>
+							</fo:block>
+						</fo:table-cell>
+					</fo:table-row>
+				</fo:table-body>
+			</fo:table>
+		</fo:static-content>
+
+
+		<fo:flow flow-name="xsl-region-body">
+			<fo:block font-size="14pt" font-family="verdana" color="red"
+				space-before="5mm" space-after="5mm">
+				W3Schools
+			</fo:block>
+
+			<fo:block text-indent="5mm" font-family="verdana" font-size="12pt">
+				<fo:inline font-size="14pt"> ?=)(+*~#'-_.:,;|!}][{%$"!</fo:inline>
+				<![CDATA[At W3Schools you will find all the Web-building tutorials you ?=)(+*~#'-_.:,;|!}][{&%$"!
+				need, from basic HTML and XHTML to advanced XML, XSL, Multimedia and WAP.]]>
+			</fo:block>
+
+			<fo:list-block>
+
+				<fo:list-item>
+					<fo:list-item-label>
+						<fo:block>*</fo:block>
+					</fo:list-item-label>
+					<fo:list-item-body>
+						<fo:block>Volvodf?adfj?sdlfjsd?fsd?flksfs</fo:block>
+					</fo:list-item-body>
+				</fo:list-item>
+
+				<fo:list-item>
+					<fo:list-item-label>
+						<fo:block>*</fo:block>
+					</fo:list-item-label>
+					<fo:list-item-body>
+						<fo:block>Saabeoriwj?fsf?awerjwifjweoijfra?wefwj</fo:block>
+					</fo:list-item-body>
+				</fo:list-item>
+
+			</fo:list-block>
+
+			<fo:block>
+				<fo:table width="110mm" border-style="ridge" border-width="5pt">
+					<fo:table-body>
+						<fo:table-row>
+							<fo:table-cell max-width="40mm" border-style="solid"
+								border-width="1pt">
+								<fo:block wrap-option="wrap" hyphenate="true" > 1. Zellesdlahflsjfsdlfkjsfsdkfsdf?sjdf</fo:block>
+							</fo:table-cell>
+							<fo:table-cell max-width="40mm" border-style="solid" border-width="1pt">
+								<fo:block wrap-option="wrap" hyphenate="true" > 2. Zellesdfsd?fasdflsakdfaslfksf?slkf</fo:block>
+							</fo:table-cell>
+							<fo:table-cell max-width="30mm" border-style="solid" border-width="1pt">
+								<fo:block wrap-option="wrap" hyphenate="true"> 3. Zellew?irqoirjwoifjsd?fsa?fiasfoiajweoeiw</fo:block>
+							</fo:table-cell>
+						</fo:table-row>
+						<fo:table-row>
+							<fo:table-cell border-style="solid" border-width="1pt">
+								<fo:block> Zelle</fo:block>
+							</fo:table-cell>
+							<fo:table-cell border-style="solid" border-width="1pt">
+								<fo:block> 2. Zelle</fo:block>
+							</fo:table-cell>
+							<fo:table-cell border-style="solid" border-width="1pt">
+								<fo:block> 3. Zelle</fo:block>
+							</fo:table-cell>
+						</fo:table-row>
+					</fo:table-body>
+				</fo:table>
+			</fo:block>
+
+			<fo:block space-before="10mm">
+					<fo:inline font-family="ZapfDingbats" font-size="14pt">&#x274F;</fo:inline>
+					<fo:inline font-family="ZapfDingbats" font-size="10pt" border="1pt black solid">&#x2715;</fo:inline>	
+					<fo:table width="100%" border-style="ridge" border-width="5pt">
+
+						<fo:table-header>
+				           <fo:table-row border-bottom-style="solid" border-bottom-width="3px" border-bottom-color="rgb(255,255,255)">
+							<fo:table-cell reference-orientation="90" >
+					         <fo:block-container >
+								<fo:block  font-weight="bold">Car</fo:block>
+					         </fo:block-container>
+							</fo:table-cell >
+							<fo:table-cell reference-orientation="90" >
+								<fo:block  font-weight="bold">Price ist</fo:block>
+							</fo:table-cell>
+ 				          </fo:table-row>
+ 							
+						</fo:table-header>
+
+						<fo:table-body>
+							<fo:table-row>
+								<fo:table-cell>
+									<fo:block>Volvo</fo:block>
+								</fo:table-cell>
+								<fo:table-cell>
+									<fo:block>$50000</fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+							<fo:table-row>
+								<fo:table-cell>
+									<fo:block>SAAB</fo:block>
+								</fo:table-cell>
+								<fo:table-cell>
+									<fo:block>$48000</fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+						</fo:table-body>
+
+					</fo:table>
+
+			</fo:block>
+			
+			<fo:block-container reference-orientation="90">   
+			  <fo:block >Rotated content. </fo:block>
+			  <fo:block>Has the reference-orientation attribute</fo:block>
+			  <fo:block>on the block-container set to 90</fo:block>
+			</fo:block-container>
+			
+
+    	  <fo:block id="theEnd"/>
+		</fo:flow>
+	</fo:page-sequence>
+
+</fo:root>

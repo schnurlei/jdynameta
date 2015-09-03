@@ -1,0 +1,33 @@
+/**
+ *
+ * Copyright 2011 (C) Rainer Schneider,Roggenburg <schnurlei@googlemail.com>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package de.jdynameta.view.base;
+
+
+public interface PropertyManager
+{
+
+	public String getPropertyFor(ManagedPanel managedPnl, String subProperty);
+
+	void setPropertyFor(ManagedPanel managedPnl, String subProperty, String value);
+
+	Integer getIntPropertyFor(ManagedPanel managedPnl, String subProperty);
+
+	void setIntPropertyFor(ManagedPanel managedPnl, String subProperty, int value);
+
+	void saveProperties();
+
+}
