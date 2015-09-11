@@ -85,29 +85,6 @@
 		
     </build> 
 	 
-    <distributionManagement>
-        <repository>
-            <uniqueVersion>true</uniqueVersion>
-            <name>JDynameta Maven Repository</name>
-            <id>maven2-repository.dynameta.googlecode.com</id>
-            <url>svn:https://jdynameta.googlecode.com/svn/repo</url>
-        </repository>
-    </distributionManagement>
-
-	 
-    <pluginRepositories>
-        <pluginRepository>
-            <id>mc-release</id>
-            <name>Local Maven repository of releases</name>
-            <url>http://mc-repo.googlecode.com/svn/maven2/releases</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-        </pluginRepository>
-    </pluginRepositories>
-	 
  	 
+   	 
 </project>

@@ -15,7 +15,6 @@ import javax.ws.rs.core.Response;
  */
 public class ResourceMetadata {
     
-    
     @GET
     @Path("{paths: .+}")
     public Response getElement(@PathParam("paths") List<PathSegment> segments, @Context HttpServletRequest request) {
