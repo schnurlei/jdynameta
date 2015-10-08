@@ -97,7 +97,6 @@ public class JsonCompactFileReader
 
     public ObjectList<ApplicationObj> readObjectList(InputStream aStreamToParse, ClassInfo aClassInfo) throws JdyPersistentException
     {
-        ObjectMapper mapper = new ObjectMapper();
         try
         {
             JsonNode rootNode = mapper.readValue(aStreamToParse, JsonNode.class);
