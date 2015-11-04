@@ -48,6 +48,7 @@
         <module>jdy.view.swing</module>
         <module>jdy.view.swingx</module>
         <module>jdy.jaxrs</module>
+        <module>jdy.model.neo4j</module>
     </modules>
  
     <dependencyManagement>
