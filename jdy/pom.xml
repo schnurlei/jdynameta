@@ -49,6 +49,7 @@
         <module>jdy.view.swingx</module>
         <module>jdy.jaxrs</module>
         <module>jdy.model.neo4j</module>
+        <module>jdy.model.mongodb</module>
     </modules>
  
     <dependencyManagement>

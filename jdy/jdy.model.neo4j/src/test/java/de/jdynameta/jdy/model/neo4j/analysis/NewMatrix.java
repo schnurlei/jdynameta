@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package de.jdynameta.jdy.model.neo4j;
+package de.jdynameta.jdy.model.neo4j.analysis;
 
 import java.io.File;
 import java.io.IOException;
