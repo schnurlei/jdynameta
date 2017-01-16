@@ -15,7 +15,6 @@
  */
 package de.jdynameta.jdy.model.neo4j.write;
 
-import com.sun.istack.internal.NotNull;
 import de.jdynameta.base.creation.ObjectWriter;
 import de.jdynameta.base.metainfo.ClassInfo;
 import de.jdynameta.base.value.JdyPersistentException;
@@ -47,7 +46,7 @@ public class Neo4JObjectWriter implements ObjectWriter {
     }
 
     @Override
-    public TypedValueObject insertObjectInDb(@NotNull ValueObject aObjToInsert, @NotNull ClassInfo aInfo) throws JdyPersistentException {
+    public TypedValueObject insertObjectInDb(ValueObject aObjToInsert, ClassInfo aInfo) throws JdyPersistentException {
 
         ClassInfo baseClass = getBaseClass(aInfo);
         final String nodeLabel = baseClass.getInternalName();

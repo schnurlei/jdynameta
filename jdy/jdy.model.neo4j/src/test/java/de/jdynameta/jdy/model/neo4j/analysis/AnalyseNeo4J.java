@@ -30,7 +30,6 @@ import org.neo4j.graphdb.ResourceIterator;
 import org.neo4j.graphdb.Result;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseSettings;
-import static org.neo4j.helpers.collection.IteratorUtil.loop;
 import org.neo4j.test.TestGraphDatabaseFactory;
 
 /**
@@ -257,9 +256,9 @@ public class AnalyseNeo4J {
             int idToFind = 45;
             String nameToFind = "user" + idToFind + "@example.org";
 
-            for (Node node : loop(aGraphDb.findNodes(label, "username", nameToFind))) {
-                node.setProperty("username", "user" + (idToFind + 1) + "@example.org");
-            }
+//            for (Node node : Iterators.loop(iterator)(aGraphDb.findNodes(label, "username", nameToFind))) {
+//                node.setProperty("username", "user" + (idToFind + 1) + "@example.org");
+//            }
             tx.success();
         }
     }
@@ -271,9 +270,9 @@ public class AnalyseNeo4J {
             int idToFind = 46;
             String nameToFind = "user" + idToFind + "@example.org";
 
-            for (Node node : loop(aGraphDb.findNodes(label, "username", nameToFind))) {
-                node.delete();
-            }
+//            for (Node node : loop(aGraphDb.findNodes(label, "username", nameToFind))) {
+//                node.delete();
+//            }
             tx.success();
         }
     }

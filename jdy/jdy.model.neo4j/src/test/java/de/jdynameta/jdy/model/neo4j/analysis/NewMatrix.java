@@ -59,7 +59,7 @@ public class NewMatrix
     public void setUp() throws IOException
     {
         FileUtils.deleteRecursively( new File( MATRIX_DB ) );
-        graphDb = new GraphDatabaseFactory().newEmbeddedDatabase( MATRIX_DB );
+        graphDb = new GraphDatabaseFactory().newEmbeddedDatabase( new File(MATRIX_DB) );
         registerShutdownHook();
         createNodespace();
     }
