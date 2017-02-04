@@ -77,8 +77,8 @@ import de.jdynameta.base.value.defaultimpl.TypedHashedWrappedValueObject;
 import de.jdynameta.base.value.defaultimpl.TypedWrappedValueObject;
 import de.jdynameta.dbaccess.jdbc.hsqldb.HSqlSchemaHandler;
 import de.jdynameta.dbaccess.jdbc.hsqldb.HsqlUtil;
-import de.jdynameta.json.JsonFileReader;
-import de.jdynameta.json.JsonFileWriter;
+import de.jdynameta.jdy.model.json.JsonFileReader;
+import de.jdynameta.jdy.model.json.JsonFileWriter;
 import de.jdynameta.metamodel.application.AppRepository;
 import de.jdynameta.metamodel.application.ApplicationRepository;
 import de.jdynameta.metamodel.application.MetaRepositoryCreator;
@@ -86,6 +86,7 @@ import de.jdynameta.persistence.manager.PersistentObjectManager;
 import de.jdynameta.persistence.manager.PersistentOperation.Operation;
 import de.jdynameta.persistence.manager.impl.ValueModelPersistenceObjectManager;
 import de.jdynameta.persistence.state.ApplicationObj;
+import java.text.ParsePosition;
 
 /**
  * Servel that provieds a REST/JSON access to Metadata
@@ -773,8 +774,12 @@ public class JDynametaRestServlet extends HttpServlet
          */
         public Date handleValue(TimeStampType aType) throws JdyPersistentException
         {
-            System.out.println(attrValue);
-            return ISO8601Utils.parse(attrValue);
+            try {
+                return ISO8601Utils.parse(attrValue, new ParsePosition(0));
+            } catch (ParseException ex) {
+                throw new JdyPersistentException(ex);
+            }
+
         }
 
         /* (non-Javadoc)

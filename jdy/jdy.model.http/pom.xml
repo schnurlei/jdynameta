@@ -11,11 +11,6 @@
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
-            <groupId>com.sdicons.jsontools</groupId>
-            <artifactId>jsontools-core</artifactId>
-            <version>1.7</version>
-        </dependency>
-        <dependency>
             <groupId>org.hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
         </dependency>
@@ -24,22 +19,7 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <scope>compile</scope>
-        </dependency>
 
-        <dependency>
-            <groupId>org.eclipse.jetty.websocket</groupId>
-            <artifactId>websocket-server</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.eclipse.jetty.websocket</groupId>
-            <artifactId>websocket-client</artifactId>
-        </dependency>
-	  
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-servlet</artifactId>
@@ -49,14 +29,6 @@
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-webapp</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
         </dependency>
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
@@ -100,6 +72,16 @@
             <artifactId>jdy.model.groovy</artifactId>
             <version>${project.version}</version>
         </dependency>
+       <dependency>
+            <groupId>de.jdynameta</groupId>
+            <artifactId>jdy.model.json</artifactId>
+            <version>${project.version}</version>
+        </dependency>    
+       <dependency>
+            <groupId>de.jdynameta</groupId>
+            <artifactId>jdy.net.httpclient</artifactId>
+            <version>${project.version}</version>
+        </dependency>    
     </dependencies>
     
 </project>

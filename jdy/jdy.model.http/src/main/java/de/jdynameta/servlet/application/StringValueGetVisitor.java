@@ -16,6 +16,8 @@ import de.jdynameta.base.metainfo.primitive.TextType;
 import de.jdynameta.base.metainfo.primitive.TimeStampType;
 import de.jdynameta.base.metainfo.primitive.VarCharType;
 import de.jdynameta.base.value.JdyPersistentException;
+import java.text.ParseException;
+import java.text.ParsePosition;
 
 public class StringValueGetVisitor implements PrimitiveTypeGetVisitor
 {
@@ -43,8 +45,11 @@ public class StringValueGetVisitor implements PrimitiveTypeGetVisitor
     @Override
     public Date handleValue(TimeStampType aType) throws JdyPersistentException
     {
-        System.out.println(attrValue);
-        return ISO8601Utils.parse(attrValue);
+        try {
+             return ISO8601Utils.parse(attrValue, new ParsePosition(0));
+         } catch (ParseException ex) {
+             throw new JdyPersistentException(ex);
+         }
     }
 
     @Override
