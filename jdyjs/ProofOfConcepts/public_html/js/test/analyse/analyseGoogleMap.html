@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<style type="text/css">
+	html { height: 100% }
+	body { height: 100%; margin: 0px; padding: 0px }
+	#map_canvas { height: 100% }
+</style>
+<script type="text/javascript"
+	src="https://maps.google.com/maps/api/js?sensor=false">
+</script>
+<script type="text/javascript">
+	function initialize() {
+		var latlng = new google.maps.LatLng(48.302258, 10.162354);
+		var myOptions = {
+			zoom: 12,
+			center: latlng,
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		};
+		var map = new google.maps.Map(document.getElementById("map_canvas"),
+			myOptions);
+			
+
+		var contentString =  
+				'<div id="content">'+
+				'<div id="siteNotice">'+
+				'</div>'+
+				'<h3 id="firstHeading" class="firstHeading">Xaver Roeder</h3>'+
+				'<p><b>Stehlesmuehle</b><br/>'+
+				'<b>86647 Buttenwiesen</b></p>'+
+				'Garten mit Bauerngarten 180 m2<br/>'+ 
+				'Pavillon, grossem Teich. (an Staatsstr,<br/>' + 
+				'zw. Frauenstetten u. Buttenwiesen) </p>'
+				'</div>'+
+				'</div>';
+
+		var gardens = [
+			{	title: 'Josef u. Antonie Ritter',
+				lat: 48.45835,
+				long: 10.41191,
+				content: createContentString("Drossenberger Str. 64 89350 Dürrlauingen ")
+			},
+			{	title: 'Josef u, Wilhelm Müller',
+				lat: 48.289347,
+				long: 10.303599,
+				content: createContentString("Ringweg 9 86519 Wiesenbach OT Oberwiesenbach")
+			},
+			{	title: 'Maritta von Perbandt',
+				lat: 48.25002,
+				long: 10.12399,
+				content: createContentString("Im Wiesengrund 1 89257 Illertissen ")
+			},
+			{	title: 'Norbert u. Waltraud Burkhart',
+				lat: 48.22349,
+				long: 10.18189,
+				content: createContentString("Am Schlossberg 4 89290 Buch")
+			},
+			{	title: 'Ludwig u. Karin Rahn',
+				lat: 48.233858,
+				long: 10.176644,
+				content: createContentString("Bucherstr. 5 89290 Buch OT Obenhausen")
+			},
+			{	title: 'Wolfgang u. Brigitte Winter ',
+				lat: 48.329691,
+				long: 10.73361,
+				content: createContentString("Rehlingerstr.11 86459 Gessertshausen OT Deubach ")
+			},
+			{	title: 'Garten des Klosters Maihingen',
+				lat: 48.92843,
+				long: 10.49184,
+				content: createContentString("Klosterhof 5 86747 Maihingen ")
+			},
+			{	title: 'Josef Schneid',
+				lat: 47.795049,
+				long: 10.359444,
+				content: createContentString("Kindberg 3 87490 Haldenwang")
+			},
+			{	title: 'Torsten u. Katarina Sadzio',
+				lat: 48.073742,
+				long: 10.461339,
+				content: createContentString("Obstgartenweg 8 87719 Mindelheim OT Westernach")
+			},
+			{	title: 'Christa Köpf',
+				lat: 47.930725,
+				long: 10.307632,
+				content: createContentString("Gustav-Stein-Str. 7 87724 Ottobeuren OT Eldern")
+			},
+			{	title: 'Torsten u. Katarina Sadzio',
+				lat: 48.073742,
+				long: 10.461339,
+				content: createContentString("Obstgartenweg 8 87719 Mindelheim OT Westernach")
+			}
+			
+		  ];
+
+		setMarkers(map, gardens);
+	}
+
+	function createContentString(title) {
+		return  '<div id="content">'+
+				'<div id="siteNotice">'+
+				'</div>'+
+				'<h3 id="firstHeading" class="firstHeading">' +title+'</h3>'+
+				'</div>';
+	}
+
+	function setMarkers(map, locations) {
+
+		var image = new google.maps.MarkerImage('../js/icons/osd-flower-icon32.png',
+			// This marker is 20 pixels wide by 32 pixels tall.
+			new google.maps.Size(32, 32),
+			// The origin for this image is 0,0.
+			new google.maps.Point(0,0),
+			// The anchor for this image is the base of the flagpole at 0,32.
+			new google.maps.Point(7, 31));
+		
+		var shadow = new google.maps.MarkerImage('../js/icons/osd-flower-icon32_shadow.png',
+			// The shadow image is larger in the horizontal dimension
+			// while the position and offset are the same as for the main image.
+			new google.maps.Size(32, 10),
+			new google.maps.Point(0,0),
+			new google.maps.Point(7, 10));
+			// Shapes define the clickable region of the icon.
+			// The type defines an HTML <area> element 'poly' which
+			// traces out a polygon as a series of X,Y points. The final
+			// coordinate closes the poly by connecting to the first
+			// coordinate.
+		var shape = {
+			coord: [1, 1, 1, 32, 32, 32, 32 , 1],
+			type: 'poly'
+		};
+
+		var infowindow = new google.maps.InfoWindow({
+		});
+
+		for (var i = 0; i < locations.length; i++) {
+			
+			createMarker(map,i, locations[i],infowindow,image, shadow, shape );
+		}
+	}
+	
+	function createMarker(map,zIndex, garden,infowindow, image, shadow, shape) {
+	
+		var myLatLng = new google.maps.LatLng(garden.lat, garden.long);
+		var marker = new google.maps.Marker({
+			position: myLatLng,
+			map: map,
+			shadow: shadow,
+			icon: image,
+			shape: shape,
+			title: garden.title,
+			zIndex: zIndex
+		});
+
+		google.maps.event.addListener(marker, 'click', function() {
+			infowindow.setContent(garden.content);
+			infowindow.open(map,marker);
+		});
+	
+	}
+
+
+
+</script>
+</head>
+<body onload="initialize()">
+  <div id="map_canvas" style="width:100%; height:100%"></div>
+</body>
+</html>

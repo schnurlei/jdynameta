@@ -1,0 +1,52 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<script src="../js/libs/jquery-1.8.0/jquery.js" type="text/javascript"></script>
+ 
+		<script>
+		$(function() {
+
+			createDynamicTable = function (tbody, rows, cols) {
+				"use strict";
+				var row,
+					rowElem,
+					col,
+					cellText;
+
+				if (tbody !== null && tbody.length > 0) {
+
+					for (row = 1; row <= rows; row++) {
+
+						rowElem = $("<tr>");
+
+						for (col = 1; col <= cols; col++) {
+
+							cellText = "Cell " + row + "." + col;
+							$("<td>")
+								.addClass("tableCell")
+								.text(cellText)
+								.data("col", col)
+								.appendTo(rowElem);
+						}
+						rowElem.appendTo(tbody);
+					}
+				}
+			};
+			createDynamicTable($("#tableId"), 7,5);
+		});
+		</script>
+
+		
+	</head>
+	<body>
+		
+		<table id="tableId"></table>
+	</body>
+</html>

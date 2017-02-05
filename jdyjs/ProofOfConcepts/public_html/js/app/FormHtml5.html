@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>HTML5 Form</title>
+
+	<script src="js/libs/jquery-2.0.3/jquery-2.0.3.js" type="text/javascript"></script>
+	<script src="js/libs/moment-1.7.2/moment.js" type="text/javascript"></script>
+
+	<!--<script src="example-resources/js/jdynameta.js" type="text/javascript"></script>-->	
+	<script src="example-resources/js/example.js" type="text/javascript"></script>	
+	<script src="example-resources/js/jquery.shapeshift.js" type="text/javascript"></script>	
+	<script src="example-resources/js/jqueryui-1.9.1/jquery-ui-1.9.1.custom.js" type="text/javascript"></script>	
+	<script src="example-resources/js/jquery.ui.touch-punch.min.js" type="text/javascript"></script>	
+	<script src="js/jdybase.js" type="text/javascript"></script>	
+	<script src="js/jdyapp.js" type="text/javascript"></script>	
+	<script src="js/jdyview.js" type="text/javascript"></script>	
+	<script src="js/jdyview.html5.js" type="text/javascript"></script>	
+	<script src="js/jdymdl.taffy.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="example-resources/css/html5form.css" >
+
+	<script>
+	    $(document).ready(function() {
+		var rep = JDYEXAMPLE.meta.createPlantTestRepository(),
+		    typesClass = rep.getClassInfo("AllAttributeTypes"),
+		    testViewModel = JDYEXAMPLE.meta.createAllAttributeTypesObject(typesClass);
+		var service = new JDY.taffy.TaffyObjectReaderWriter();
+		var form = JDY.view.createHtml5FormForClassInfo(typesClass, service);
+
+		$("#divForm").append(form.getFormElem());
+		form.setValueObject(testViewModel);
+		
+		$('.shapeshiftDiv').shapeshift();
+	    });
+
+
+	</script>			
+    </head>
+    <body>
+	<div id="divForm">
+	    
+	    <h2>Form Data</h2>
+	    <span class="required_notification">* Denotes Required Field</span>
+
+	</div>
+    </body>
+</html>

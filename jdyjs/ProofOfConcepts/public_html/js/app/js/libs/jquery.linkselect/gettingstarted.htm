@@ -1,0 +1,513 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<title>Giva Labs - Linkselect jQuery Plug-in | Giva</title>
+
+	<link type="text/css" href="./css/docs.css" rel="stylesheet" media="all" />
+	<link type="text/css" href="./css/jquery.linkselect.css" rel="stylesheet" media="all" />
+
+	<!---// load jQuery from the GoogleAPIs CDN //--->
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js"></script>
+	<script type="text/javascript" src="./lib/jquery.linkselect.js"></script>
+	<script type="text/javascript" src="./lib/jquery.bgiframe.js"></script>
+
+	<script type="text/javascript">
+	<!--//
+	// on DOM ready
+	$(document).ready(function (){
+		$("#current_rev").html("v"+$.linkselect.version);
+		$("select.linkselect").linkselect();
+	});
+	//-->
+	</script>
+</head>
+
+<body>
+
+			<h1 class="secttl">Giva Labs </h1>
+			<h2 class="sectag">Linkselect jQuery Plug-in <span id="current_rev"></span></h2>
+
+			<h3 id="overview">Overview</h3>
+			<p>
+				The jQuery Linkselect plug-in converts &lt;select /&gt; elements into a combination
+				of an anchor tag associated with a dropdown menu. This combination allows you to highly
+				customize the look and feel of the select element, without losing any functionality.
+			</p>
+			
+			<p>
+				While there are many similar plug-ins, the key differentiator with the Linkselect plug-in
+				is that is designed to fit in limited real estate. One key design issue with the &lt;select /&gt;
+				is that it's hard to control how much screen real estate is taken up by the element. If your
+				&lt;select /&gt; contains options of varying sizes, the width of the &lt;select /&gt;
+				element can quickly get out of hand.
+			</p>
+			
+			<p>
+				In a recent project we were working on, we required the functionality of a &lt;select /&gt;
+				element, but had to work within a very confined design area. Because we had no control
+				over how much data or the length of the items that appeared in the &lt;select /&gt;
+				element, we knew couldn't use the element as-is. What we need was a &lt;select /&gt;
+				element that would allow us to wrap long options to another line. This is what lead
+				to the development of the Linkselect plug-in.
+			</p>
+			
+			<p>
+				The Linkselect Plug-in resolves this space by replacing the &lt;select /&gt; element
+				with an anchor tag that provides all the same functionality of a single item select
+				box.
+			</p>
+
+			<h3 id="requirements">Requirements</h3>
+			<p>In order to use the Linkselect plug-in, you need the following: </p>
+			<ul class="bullet">
+				<li class="bullet">jQuery v1.4.3 (or higher)*</li>
+				<li class="bullet">jquery.linkselect.js Plug-in</li>
+				<li class="bullet">jquery.bgiframe.js Plug-in (Optional; for fixing overlay issues in IE6)</li>
+			</ul>
+
+			<h3 id="usage">Usage</h3>
+
+			<p>To convert your &lt;select /&gt; elements into linkselect elements, just invoke the jQuery plug-in using the following syntax:</p>
+
+			<pre><code class="js">$(&quot;select&quot;).linkselect(<em>[options]</em>);</code></pre>
+
+			<p>
+				The width of the drop down based on the width of the anchor tag. If anchor tag happens to
+				be an inline element (i.e. <samp>display: inline;</samp>,) then the width will be based
+				on the anchor's parent element. If the <samp>fixedWidth</samp> is set to <samp>false</samp>,
+				then the drop down will be further adjusted to make sure that the width of the drop down
+				is wide enough. You can set a maximum width by setting the <samp>max-width</samp> property
+				of the <samp>.linkselect-container</samp> class.
+			</p>
+
+			<h4 id="arguments">Arguments</h4>
+			<dl>
+				<dt>options</dt>
+				<dd>
+					<p>This argument is <em><strong>optional</strong></em> and allows you to customize the settings used for each instance of the plug-in. For a list of all available options, see the <a href="#options">Options</a> section.</p>
+				</dd>
+			</dl>
+
+			<h4 id="elements">Elements</h4>
+			
+			<p>
+				The Linkselect converts the standard &lt;select /&gt; element to a specialized UI element. There are a few key
+				attributes from both the &lt;select /&gt; and &lt;option /&gt; elements which are used by the Linkselect plug-in
+				and special funcationality. Below is a list of the attributes that provided special functionality to the Linkselect plug-in.
+			</p>
+
+			<h5>
+				&lt;select /&gt;
+			</h5>
+
+			<dl>
+				<dt>id</dt>
+				<dd>
+					<p>
+						This attribute is <em><strong>required</strong></em> and is used as the <samp>id</samp> 
+						attribute of the hidden input element that is created by the plug-in. If no <samp>name</samp> attribute 
+						exists, then the <samp>id</samp> is used as the <samp>name</samp> attribute of the hidden element
+						that is created.
+					</p>
+				</dd>
+				<dt>name</dt>
+				<dd>
+					<p>
+						This attribute is <em><strong>optional</strong></em> and is used as the <samp>name</samp> 
+						attributes of the hidden input element that is created by the plug-in.
+					</p>
+				</dd>
+				<dt>title</dt>
+				<dd>
+					<p>
+						This attribute is <em><strong>optional</strong></em> and is used to provide a title bar to the Linkselect's dropdown
+						menu.
+					</p>
+				</dd>
+				<dt>tabindex</dt>
+				<dd>
+					<p>
+						This attribute is <em><strong>optional</strong></em> and is used to set the tabindex of the anchor tag. This just
+						duplicates the original &lt;select /&gt; element's tabindex.
+					</p>
+				</dd>
+				<dt>onchange</dt>
+				<dd>
+					<p>
+						This attribute is <em><strong>optional</strong></em> and will be fired just like the original onchange event would.
+						However, when this function is triggered, it will have access to the same arguments that the normal change
+						callback would.
+					</p>
+				</dd>
+			</dl>
+
+			<blockquote>
+				<strong>NOTE:</strong>
+				The Linkselect Plug-in was designed only for single select style elements. It will not allow you to
+				select more than one option.
+			</blockquote>
+			
+			<h5>
+				&lt;option /&gt;
+			</h5>
+
+			<p>
+				<strong>NOTE:</strong>
+				The text of the &lt;option /&gt; is used as the text shown in the dropdown for the item.
+			</p>
+			
+			<dl>
+				<dt>value</dt>
+				<dd>
+					<p>
+						This attribute is <em><strong>option</strong></em> and is used as the value for the selected item.
+					</p>
+				</dd>
+				<dt>selected</dt>
+				<dd>
+					<p>
+						This attribute is <em><strong>optional</strong></em> and is used to define which option is selected
+						by default.
+					</p>
+				</dd>
+				<dt>class</dt>
+				<dd>
+					<p>
+						This attribute is <em><strong>optional</strong></em> and is used to define any classes that should
+						be applied to the option in the dropdown.
+					</p>
+					<p>
+						You can also supply an optional "placeholder" class (see <a href="#options">options</a>) to 
+						an <samp>option</samp> element to have the option tag used as a selectable title for the 
+						linkselect object. 
+					</p>
+				</dd>
+			</dl>
+
+			<p>Now that we have a reference to the widget, we can invoke any of the public API calls.</p>
+
+			<h4 id="methods">Public API</h4>
+			<dl class="methods">
+				<dt>$("#id").linkselect("val")</dt>
+				<dd>
+					<p>Returns the current value for the linkselect element.</p>
+				</dd>
+				<dt>$("#id").linkselect("val", value)</dt>
+				<dd>
+					<p>Sets the value of the linkselect element.</p>
+				</dd>
+				<dt>$("#id").linkselect("text")</dt>
+				<dd>
+					<p>Returns the text label for the selected linkselect option.</p>
+				</dd>
+				<dt>$("#id").linkselect("focus")</dt>
+				<dd>
+					<p>Places focus on the Linkselect's anchor tag. This is like doing a $("a").focus();</p>
+				</dd>
+				<dt>$("#id").linkselect("blur")</dt>
+				<dd>
+					<p>Blur's the focus from the Linkselect's anchor tag. This is like doing a $("a").blur();</p>
+				</dd>
+				<dt>$("#id").linkselect("change")</dt>
+				<dd>
+					<p>Triggers the "change" event for the Linkselect element. You can use this to trigger 
+					off the change events for the default selected item.</p>
+				</dd>
+				<dt>$("#id").linkselect("open")</dt>
+				<dd>
+					<p>Opens the Linkselect's dropdown menu.</p>
+				</dd>
+				<dt>$("#id").linkselect("close")</dt>
+				<dd>
+					<p>Closes the Linkselect's dropdown menu.</p>
+				</dd>
+				<dt>$("#id").linkselect("disable", boolean)</dt>
+				<dd>
+					<p>Disables (true) or enables (false) the Linkselect element. Disabled elements still pass 
+					their form value when the form is submitted to the server, but the user can not change the value
+					via the UI.</p>
+				</dd>
+				<dt>$("#id").linkselect("destroy")</dt>
+				<dd>
+					<p>This destroys the linkselect element and places the original <samp>select</samp> element back in the 
+					DOM. The <samp>select</samp> element will reflect any changes made to the <samp>option</samp> elements
+					done by the replaceOptions API call.</p>
+				</dd>
+				<dt>$("#id").linkselect("replaceOptions", options<em>, includeFilter</em><em>, doCallback</em>)</dt>
+				<dd>
+					<p>Replaces the options in the dropdown with the array of objects passed into the options argument.
+					You can use this API method to repopulate a Linkselect with options via an AJAX call.</p>
+					<p>You can use the <samp>includeFilter</samp> argument to specify a jQuery selector of elements
+					to not replace. This is useful if you want to preserve your placeholder items, or other items in the
+					select element that you do not want replaced.</p>
+					<p>When the options are replaced, the <samp>change</samp> callback is triggered for the newly selected item.
+					You can set the <samp>doCallback</samp> to <samp>false</samp> to prevent callback from being triggered.</p>
+					<p>For example:</p>
+<pre><code class="js">var options = [
+	  {value: 1, text: "Option 1"}
+	, {value: 2, text: "Option 2"}
+	, {value: 3, text: "Option 3", selected: true}
+	, {value: 4, text: "Option 4", className: "emphasis"}
+	, {value: 5, text: "Option 5", className: "de-emphasis"}
+];
+
+$("#id").linkselect("replaceOptions", options);
+</code></pre>
+				<p>
+					Each item in the "options" array is a JavaScript object that must contain at least the keys "value" and "text".
+					Also supported are the keys "selected" (which can be true for any single item that needs selecting) and the
+					"className" key, which can be used to define a class for the &lt;option /&gt; element.
+				</p>
+				</dd>
+				<dt>$("#id").linkselect("object")</dt>
+				<dd>
+					<p>Returns a reference to the internal $.Linkselect object. This is for advanced usage only. Examine the source code for uses of the $.Linkselect object.</p>
+				</dd>
+			</dl>
+
+			<h4 id="options">Options</h4>
+			<p>There are a number of options available for customizing the look and feel of the Linkselect widget.</p>
+<pre><code class="js">{
+         style: "linkselect"       // the default style to use
+       , classLink: ""             // additional classes to use for the anchor tag
+       , yAxis: "top"              // the position of the dropdown relative to the link (can be either 
+                                   // "top" or "bottom")
+       , titleAlign: "right"       // location of dropdown's title bar if dropdown is on right edge of 
+                                   // the screen (can be either "right" or "left")
+       , fixedWidth: false         // false = dropdown sizes to width of options, true = dropdown uses width of link
+       , init: null                // callback that occurs when a linkselect menu is initialized
+       , change: null              // callback that occurs when an option is selected
+       , format: null              // callback that occurs when rendering the HTML to use for an item in the dropdown
+       , open: null                // callback that occurs when the menu is opened
+       , close: null               // callback that occurs when the menu is closed
+}</code></pre>
+
+			<h4 id="keyboard_usage">Keyboard Usage</h4>
+			
+			<p>The linkselect's keyboard functionality is set to mimic the behavior of Internet Explorer 6's handling
+			of the &lt;select /&gt; element. When a Linkselect element has focus you can:</p>
+			
+			<ul class="bullet">
+				<li class="bullet">Press the first letter of an option to jump to the first instance of that item in the dropdown. Subsequent presses of the same key will cycle through all items that start with the matching character. When a new key is pressed, it will attempt to jump to the first item that starts with the new keyboard character typed.</li>
+				<li class="bullet">Press [UP ARROW] or [DOWN ARROW] to cycle through valid options</li>
+				<li class="bullet">Press [HOME] to jump to the first item</li>
+				<li class="bullet">Press [END] to jump to the last item</li>
+				<li class="bullet">Press [PAGE UP] to jump up one page of options</li>
+				<li class="bullet">Press [PAGE DOWN] to jump down one page of options</li>
+			</ul>
+			<h3 id="getting_started">Getting Started</h3>
+			<p>The first thing we need to do is to load the required JavaScript libraries and the CSS stylesheet used by the widget:</p>
+<pre><code class="html">&lt;script type=&quot;text/javascript&quot; src=&quot;./lib/jquery-1.2.6.min.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;./lib/jquery.linkselect.js&quot;&gt;&lt;/script&gt;
+
+&lt;!---// load the Linkselect CSS stylesheet //---&gt;
+&lt;link type=&quot;text/css&quot; href=&quot;./css/jquery.linkselect.css&quot; rel=&quot;stylesheet&quot; media=&quot;all&quot; /&gt;</code></pre>
+
+			<p>Before you can invoke an instance of the Linkselect widget, you must have one or more &lt;select /&gt; elements on your page. 
+			The key attributes from your select tag (id, title, tabindex) are all supported by the Linkselect plug-in.</p>
+
+			<pre><code class="html">&lt;select id=&quot;category&quot; title=&quot;Select a category&quot; class=&quot;linkselect&quot;&gt;
+	&lt;option value=&quot;&quot;&gt;[none]&lt;/option&gt;
+	&lt;option value=&quot;help_desk&quot;&gt;Help Desk&lt;/option&gt;
+	&lt;option value=&quot;customer_service&quot;&gt;Customer Service&lt;/option&gt;
+	&lt;option value=&quot;knowledge_manager&quot;&gt;Knowledge Manager&lt;/option&gt;
+	&lt;option value=&quot;change_manager&quot;&gt;Change Manager&lt;/option&gt;
+	&lt;option value=&quot;service_desk&quot;&gt;Service Desk&lt;/option&gt;
+	&lt;option value=&quot;asset_manager&quot;&gt;Asset Manager&lt;/option&gt;
+	&lt;option value=&quot;software_manager&quot;&gt;Software Manager&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+
+			<p>The next step is to actually create an instance of the Linkselect widget. You want to make sure to initialize the widget after all the necessary DOM elements are available, which makes the document.ready event a great place to initialize the widget. </p>
+<pre><code class="html">&lt;script type=&quot;text/javascript&quot;&gt;
+$(document).ready(function (){
+	$("#category").linkselect();
+});
+&lt;/script&gt;</code></pre>
+			<p>Now let us take a look at what the code above produced.</p>
+			<h3 id="example">Example</h3>
+			
+			<blockquote style="height: 80px;">
+				<div style="float: left; width: 50%;">
+					<h4>
+						Original &lt;select /&gt; element
+					</h4>
+					<!--// start example code //-->
+					<p>
+						Please select a category:
+						<select id="category" title="Select a category">
+							<option value="">[none]</option>
+							<option value="help_desk">Help Desk</option>
+							<option value="customer_service">Customer Service</option>
+							<option value="knowledge_manager">Knowledge Manager</option>
+							<option value="change_manager">Change Manager</option>
+							<option value="service_desk">Service Desk</option>
+							<option value="asset_manager">Asset Manager</option>
+							<option value="software_manager">Software Manager</option>
+						</select>
+					</p>
+				</div>
+				
+				<div style="float: left; width: 50%;">
+					<h4>
+						Same code using the Linkselect Plug-in
+					</h4>
+					<!--// start example code //-->
+					<p>
+						Please select a category:
+						<span style="width: 200px;">
+							<select id="category" title="Select a category" class="linkselect">
+								<option value="">[none]</option>
+								<option value="help_desk">Help Desk</option>
+								<option value="customer_service">Customer Service</option>
+								<option value="knowledge_manager">Knowledge Manager</option>
+								<option value="change_manager">Change Manager</option>
+								<option value="service_desk">Service Desk</option>
+								<option value="asset_manager">Asset Manager</option>
+								<option value="software_manager">Software Manager</option>
+							</select>
+						</span>
+					</p>
+				</div>
+			</blockquote>
+			<!--// end example code //-->
+
+			<p>
+				Click on the "[none]" anchor above to open up the linkselect dropdown. As you change options, the text of the
+				anchor will get updated with the text from the &lt;option /&gt; tag. A hidden &lt;input /&gt; element with
+				with the same name/id attribute will have it's value updated with the value of the &lt;option /&gt; tag. The
+				hidden &lt;input /&gt; element is used to pass the value of the Linkselect element back to the server.
+			</p>
+			<p>Linkselect's element have full keyboard support, which has been modeled after how Internet Explorer 6 handles &lt;select /&gt; elements. See the <a href="#keyboard_usage">Keyboard Usage</a> section for more information. </p>
+			<p>For more examples, see the <a href="linkselect_example.htm">Giva Labs - Linkselect Example Page</a> page.</p>
+
+			<h3 id="support">Support</h3>
+			<p>This source code is provided as-is. At this time Giva is not offering direct support for this product. If you are in need of assistance,  post your question to one of the <a href="http://docs.jquery.com/Discussion">jQuery Mailing Lists</a>. Members of the Giva development team actively participate on the jQuery Mailing lists, so if we see your question we will try our best to respond.</p>
+
+			<h3 id="license">License</h3>
+			<pre>Copyright 2008 Giva, Inc. (<a href="http://www.givainc.com/labs/">http://www.givainc.com/labs/</a>) 
+
+Licensed under the Apache License, Version 2.0 (the "License"); 
+you may not use this file except in compliance with the License. 
+You may obtain a copy of the License at 
+	<a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">http://www.apache.org/licenses/LICENSE-2.0</a> 
+
+Unless required by applicable law or agreed to in writing, software 
+distributed under the License is distributed on an "AS IS" BASIS, 
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+See the License for the specific language governing permissions and 
+limitations under the License.</pre>
+
+			<h3 id="revision">
+				Revisions
+			</h3>
+			<dl class="revisions">
+				<dt>v1.5.10 (2012-09-11)</dt>
+				<dd>
+					<ul>
+						<li>Added the "change" method for re-running the change events on the currently selected item</li>
+					</ul>
+				</dd>
+				<dt>v1.5.01 (2012-01-03)</dt>
+				<dd>
+					<ul>
+						<li>Fixed CSS declaration for "select" skin to use a defined font family and size and various other tweaks to improve appearance</li>
+						<li>Changes in the keyboard behavior when a placeholder is used so that PAGE UP, PAGE DOWN, END and HOME stay within the context of the dropdown menu</li>
+					</ul>
+				</dd>
+				<dt>v1.5.00 (2011-12-23)</dt>
+				<dd>
+					<ul>
+						<li>
+							Revised CSS naming structure to make it to have multiple visual styles of linkselect elements on the same page.
+							The changes in v1.5 are not backwards compatible, so you will need to update your CSS in order to upgrage
+							to v1.5. You can either replace you existing CSS files with one included in the zip file, or you can modify
+							your existing CSS files to match the new naming syntax (which for the most part is just changing the camel
+							casing from "linkselectLink" to "linkselect-link", "linkselectLinkOpen" to "linkselect-link-open", etc.
+							Also, all CSS classes now using the prefix "linkselect-" by default.
+						</li>
+						<li>
+							Added new "style" option. This replaces all the previous class* options. The default style is "linkselect" and
+							is simply used as the prefix used for all the CSS classes. You can create custom linkselect skins by just
+							copying one of the included CSS files and changing the prefix to match your style option value.
+						</li>
+						<li>Added "text" API call to return the label of the currently selected option.</li>
+						<li>Added "destroy" API call to destroy a linkselect element and return to original select element.</li>
+						<li>Changed the "replaceOptions" API to add a new "includeFilter" argument. The API change is backwards compatible.</li>
+						<li>jQuery.delegate() is now used to monitor event changes</li>
+						<li>Changed &lt;li /&gt; elements to use "data-" attributes for custom attributes</li>
+						<li>Changed &lt;li /&gt; elements to use "data-value" for storing selectable value instead of the "rel" attribute.</li>
+						<li>Fixed issue with Chrome not correctly accepting focus when the linkselect element was clicked.</li>
+						<li>
+							Events related to closing/resizing of the open linkselect element are now registered/unregistered when 
+							the menu opens. This helps improve performance when there are many linkselect elements on the page as it
+							reduces the document.click events that fire to see if the menu should be closed.
+						</li>
+						<li>
+							Added ability to use both "name" and "id" attributes on a select element with different values.
+						</li>
+						<li>
+							Added new "placeholder" functionality. You can now give an option element a class of "placeholder" to 
+							have it used as a selectable title for the linkselect element. This allows you to use a 
+							"Please select..." option element in your select and have it used as the title of the linkselect.
+							Users will be able to select this option, just like any other option element.
+						</li>
+						<li>Fixed various positioning bugs.</li>
+					</ul>
+				</dd>
+				<dt>v1.2.09 (2011-08-08)</dt>
+				<dd>
+					<ul>
+						<li>Fixed issue with code using .attr("className") instead of .attr("class")</li>
+					</ul>
+				</dd>
+				<dt>v1.2.08 (2011-07-30)</dt>
+				<dd>
+					<ul>
+						<li>Fixed error with repaint() function when &lt;select /&gt; element did not have a title attribute</li>
+					</ul>
+				</dd>
+				<dt>v1.2.07 (2009-07-13)</dt>
+				<dd>
+					<ul>
+						<li>Fixed error with close callback</li>
+					</ul>
+				</dd>
+				<dt>v1.2.06 (2009-03-30)</dt>
+				<dd>
+					<ul>
+						<li>Fixed issues with IE8</li>
+					</ul>
+				</dd>
+				<dt>v1.2.05 (2009-02-10)</dt>
+				<dd>
+					<ul>
+						<li>Fixed bug where keyboard support did not work in Chrome (moved from using keypress to keydown)</li>
+					</ul>
+				</dd>
+				<dt>v1.2.04 (2008-12-09)</dt>
+				<dd>
+					<ul>
+						<li>Fixed bug in getScreenDimensions() by changing width/height calculation to use the document object instead of the body element</li>
+					</ul>
+				</dd>
+				<dt>v1.2.03 (2008-12-01)</dt>
+				<dd>
+					<ul>
+						<li>Fixed bug in repaint() if not using a title on your select elements</li>
+						<li>Fixed bug in repaint() if not using a title on your select elements</li>
+						<li>Added close() method (which did not exists, contrary to documentation)</li>
+					</ul>
+				</dd>
+				<dt>v1.2.01 (2008-10-14)</dt>
+				<dd>
+					<ul>
+						<li>Initial release</li>
+					</ul>
+				</dd>
+			</dl>
+
+</body>
+
+</html>

@@ -1,0 +1,741 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<title>Giva Labs - Linkselect Example Page | Giva</title>
+
+	<!---// load jQuery from the GoogleAPIs CDN //--->
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js"></script>
+	<script type="text/javascript" src="./lib/jquery.linkselect.js"></script>
+	<script type="text/javascript" src="./lib/jquery.bgiframe.js"></script>
+
+	<link type="text/css" href="./css/docs.css" rel="stylesheet" media="all" />
+	<link type="text/css" href="./css/jquery.linkselect.css" rel="stylesheet" media="all" />
+	<link type="text/css" href="./css/jquery.linkselect.style.select.css" rel="stylesheet" media="all" />
+	
+	<style type="text/css">
+	label {
+		font-weight: bold;
+	}
+
+	.clear {
+		clear: both;
+	}	
+
+	.box_orig {
+		display: block;
+		width: 350px;
+		height: 60px;
+		padding: 10px;
+		border: 1px solid #000;
+		float: left;
+	}
+
+	.box_ls {
+		display: block;
+		width: 350px;
+		height: 60px;
+		padding: 10px;
+		margin-left: 20px;
+		border: 1px solid #000;
+		float: left;
+	}
+	
+	.box_orig h3, .box_ls h3 {
+		border-bottom: 0;
+	}
+
+	#example3 {
+		position: relative;
+		height: 60px;
+	}
+
+	#example3 .box {
+		position: absolute; 
+		right: 0; 
+		width: 300px; 
+		padding: 10px; 
+		border: 1px solid #000;
+		background-color: #fff;
+	}
+
+	#example3 .box label {
+		width: 80px; 
+		float: left; 
+	}
+
+	#example3 .box .value {
+		width: 220px; 
+		float: left;
+	}
+	
+	.change_log {
+		border: 1px solid #999;
+		padding: 10px;
+	}
+	
+	.change_log h4 {
+		margin: 0 0 5px 0;
+		border-bottom: 1px solid #ccc;
+	}
+	
+	#change_log {
+		font-size: 1.0em;
+		font-family: monospace;
+	}
+	</style>
+
+	<script type="text/javascript">
+	<!--//
+	if( !window.console ){
+		(function (window){
+			window.console = {};
+			window.console.log = function (){};
+			window.console.dir = function (){};
+		})(window || {});
+	}
+	
+	// on DOM ready
+	$(document).ready(function (){
+		var init = function (style){
+			style = style || "";
+			$("select.linkselect").linkselect({
+				style: style
+				, change: function(li, value, text){
+					if( window.console ) console.log(value);
+		  	}
+			});
+	
+			$("#ex8_ls").linkselect({
+				style: style
+				, change: function (li, value, text){
+					$('<div>' + value + ' | ' + text + '</div>').appendTo("#change_log");
+				}
+			});
+	
+			$("#ex9_ls").linkselect({
+				style: style
+				, format: function (html, value, label, pos){
+					if( value == "Service Desk" ) html = '<span style="font-weight: bold; color: #a72947;">' + html + '</span>';
+					return '<span style="float: right;">' + pos + '</span>' + html;
+				}
+			});
+	
+			$("#ex12_ls").linkselect({
+				style: style
+				, init: function (){
+					// trigger change events for the default value
+					this.change();
+				}
+				, change: function (li, value, text){
+					$('<div>' + value + ' | ' + text + '</div>').appendTo("#change_log_change");
+				}
+			});
+		}
+		
+		init(0 ? '' : 'selectbox');
+		
+		// style switcher
+		$("button.css_switcher").click(function (){
+			// destroy existing linkselects
+			$("input.linkselect,#ex8_ls,#ex9_ls").linkselect("destroy");
+			init(this.title);
+		});
+		
+	});
+	//-->
+	</script>
+</head>
+
+<body>
+
+<h1>
+	Giva Labs - Linkselect Example Page
+</h1>
+
+<h2>
+	Example 1 - Standard implementation
+</h2>
+
+<p>
+	Here's a standard example of a linkselect plug-in. The box on the left
+	contains the original HTML, while the box on the right shows the same
+	element initialized with the Linkselect plug-in.
+</p>
+
+<div class="box_orig">
+	<h3>
+		Original &lt;select&gt; element
+	</h3>
+	
+	<select id="ex1_orig">
+		<option>Help Desk</option>
+		<option>Customer Service</option>
+		<option>Knowledge Manager</option>
+		<option>Change Manager</option>
+		<option>Service Desk</option>
+		<option>Asset Manager</option>
+		<option>Software Manager</option>
+	</select>
+	
+</div>
+
+<div class="box_ls">
+	<h3>
+		Linkselect version
+	</h3>
+	
+	<select id="ex1_ls" class="linkselect">
+		<option>Help Desk</option>
+		<option>Customer Service</option>
+		<option>Knowledge Manager</option>
+		<option>Change Manager</option>
+		<option>Service Desk</option>
+		<option>Asset Manager</option>
+		<option>Software Manager</option>
+	</select>
+	
+</div>
+
+<div class="clear"></div>
+
+<div class="codeblock">
+	<h4>
+		Code
+	</h4>
+	
+	<code>
+		$("select.linkselect").linkselect();
+	</code>
+</div>
+
+<h2>
+	Example 2 - Using title attribute
+</h2>
+
+<p>
+	This example is identical to the first example, except we've added a "title" attribute to the select
+	element which is shown when the dropdown menu appears.
+</p>
+
+<div class="box_orig">
+	<h3>
+		Original &lt;select&gt; element
+	</h3>
+	
+	<select id="ex2_orig" title="Select a category">
+		<option>Help Desk</option>
+		<option>Customer Service</option>
+		<option>Knowledge Manager</option>
+		<option>Change Manager</option>
+		<option>Service Desk</option>
+		<option>Asset Manager</option>
+		<option>Software Manager</option>
+	</select>
+	
+</div>
+
+<div class="box_ls">
+	<h3>
+		Linkselect version
+	</h3>
+	
+	<select id="ex2_ls" title="Select a category" class="linkselect">
+		<option>Help Desk</option>
+		<option>Customer Service</option>
+		<option>Knowledge Manager</option>
+		<option>Change Manager</option>
+		<option>Service Desk</option>
+		<option>Asset Manager</option>
+		<option>Software Manager</option>
+	</select>
+	
+</div>
+
+<div class="clear"></div>
+
+<div class="codeblock">
+	<h4>
+		Code
+	</h4>
+	
+	<code>
+		$("select.linkselect").linkselect();
+	</code>
+</div>
+
+<h2>
+	Example 3 - Intelligent positioning
+</h2>
+
+<p>
+	Here's an example of the linkselect that is positioned on the right side of the screen.
+	You can see that the linkselect will allow the value/link to wrap to multiple rows and
+	the position of the dropdown is also positioned so that options remain in the in the
+	X-axis viewpoint.
+</p>
+
+<div id="example3">
+	<div class="box">
+		<label for="ex3_ls">
+			Job Title:
+		</label>
+		<div class="value">
+			<select id="ex3_ls" title="Select a category" class="linkselect">
+				<option>Help Desk Analyst</option>
+				<option>IT Technician</option>
+				<option selected="selected">Employee</option>
+				<option>IT Manager</option>
+				<option>Help Desk Administrator</option>
+			</select>
+		</div>
+		<br class="clear" style="margin-top: 5px;" />
+		<label for="ex3_ls">
+			Product:
+		</label>
+		<div class="value">
+			<select id="ex3_ls" title="Select a category" class="linkselect">
+				<option>Help Desk - Giva eHelpDesk</option>
+				<option>Customer Service - Giva eCustomerService</option>
+				<option selected="selected">Knowledge Manager - Giva eKnowledgeManager</option>
+				<option>Change Manager - Giva eChangeManager</option>
+				<option>Service Desk - Giva eServiceDesk</option>
+				<option>Asset Manager - Giva eAssetManager</option>
+				<option>Software Manager - Giva eSoftwareManager</option>
+			</select>
+		</div>
+	</div>
+</div>
+
+<div class="clear"></div>
+
+<div class="codeblock">
+	<h4>
+		Code
+	</h4>
+	
+	<code>
+		$("select.linkselect").linkselect();
+	</code>
+</div>
+
+<h2>
+	Example 4 - Getting/setting the value
+</h2>
+
+<p>
+	The linkselect works by replacing the &lt;select /&gt; element with a hidden
+	&lt;input /&gt; tag. The linkselect() plug-in provides a convenient API
+	for getting and setting the value of the field.
+</p>
+
+<p>
+	<label for="ex4_ls">
+		Category:
+	</label>
+	<select id="ex4_ls" title="Select a category" class="linkselect">
+		<option>Help Desk</option>
+		<option>Customer Service</option>
+		<option>Knowledge Manager</option>
+		<option>Change Manager</option>
+		<option>Service Desk</option>
+		<option>Asset Manager</option>
+		<option>Software Manager</option>
+	</select>
+</p>
+
+<p>
+	<input type="button" value="Get Value" onclick="alert($('#ex4_ls').linkselect('val'));" />
+	<input type="button" value="Set Value = Change Manager" onclick="$('#ex4_ls').linkselect('val', 'Change Manager');" />
+</p>
+	
+
+<div class="codeblock">
+	<h4>
+		Code
+	</h4>
+	
+	<code>
+		// get value<br />
+		$("#ex4_ls").linkselect("val");<br />
+		<br />
+		// set value<br />
+		$("#ex4_ls").linkselect("val", "Change Manager");
+	</code>
+</div>
+
+<h2>
+	Example 5 - Enable/disable the linkselect
+</h2>
+
+<p>
+	You can also easily enable or disable the linkselect field.
+</p>
+
+<p>
+	<label for="ex5_ls">
+		Category:
+	</label>
+	<select id="ex5_ls" title="Select a category" class="linkselect">
+		<option>Help Desk</option>
+		<option>Customer Service</option>
+		<option>Knowledge Manager</option>
+		<option>Change Manager</option>
+		<option>Service Desk</option>
+		<option>Asset Manager</option>
+		<option>Software Manager</option>
+	</select>
+</p>
+
+<p>
+	<input type="button" value="Disable" onclick="$('#ex5_ls').linkselect('disable', true);" />
+	<input type="button" value="Enable" onclick="$('#ex5_ls').linkselect('disable', false);" />
+</p>
+	
+
+<div class="codeblock">
+	<h4>
+		Code
+	</h4>
+	
+	<code>
+		// disable field<br />
+		$("#ex5_ls").linkselect("disable", true);<br />
+		<br />
+		// enable field<br />
+		$("#ex5_ls").linkselect("disable", false);<br />
+	</code>
+</div>
+
+<h2>
+	Example 6 - Enable/disable the linkselect
+</h2>
+
+<p>
+	You can also programmatically open the linkselect dropdown. This is very
+	useful if you want to add a hotkey to open the linkselect element.
+</p>
+
+<p>
+	<input type="button" value="Open" onclick="$('#ex6_ls').linkselect('open');" />
+</p>
+	
+<p>
+	<label for="ex6_ls">
+		Category:
+	</label>
+	<select id="ex6_ls" title="Select a category" class="linkselect">
+		<option>Help Desk</option>
+		<option>Customer Service</option>
+		<option>Knowledge Manager</option>
+		<option>Change Manager</option>
+		<option>Service Desk</option>
+		<option>Asset Manager</option>
+		<option>Software Manager</option>
+	</select>
+</p>
+
+<div class="codeblock">
+	<h4>
+		Code
+	</h4>
+	
+	<code>
+		// open/show dropdown<br />
+		$("#ex6_ls").linkselect("open");<br />
+	</code>
+</div>
+
+<h2>
+	Example 7 - Blur/Focus
+</h2>
+
+<p>
+	There are also blur/focus methods for setting focus on the field (or removing focus.) 
+	These functions come in handy if your application uses hotkeys to jump to different
+	fields in your application.
+</p>
+
+<p>
+	<label for="ex7_ls">
+		Category:
+	</label>
+	<select id="ex7_ls" title="Select a category" class="linkselect">
+		<option>Help Desk</option>
+		<option>Customer Service</option>
+		<option>Knowledge Manager</option>
+		<option>Change Manager</option>
+		<option>Service Desk</option>
+		<option>Asset Manager</option>
+		<option>Software Manager</option>
+	</select>
+</p>
+
+<p>
+	<input type="button" value="Focus" onclick="$('#ex7_ls').linkselect('focus');" />
+	<input type="button" value="Blur" onclick="$('#ex7_ls').linkselect('blur');" />
+</p>
+	
+
+<div class="codeblock">
+	<h4>
+		Code
+	</h4>
+	
+	<code>
+		// place focus in the field<br />
+		$("#ex7_ls").linkselect("focus");<br />
+		<br />
+		// blur of the field<br />
+		$("#ex7_ls").linkselect("blur");<br />
+	</code>
+</div>
+
+<h2>
+	Example 8 - Using callbacks
+</h2>
+
+<p>
+	There are several callback options you can define to help customize
+	the behavior of your linkselect() elements. The "change" callback
+	allows you to add behavior to your linkselect elements by firing
+	this callback every time the value changes (either manually by
+	the user or by using the linkselect("val", value) API call.) 
+</p>
+
+<p>
+	The example below will log each change to the linkselect() field to
+	the "Change Log" box below.
+</p>
+
+<p>
+	<label for="ex8_ls">
+		Category:
+	</label>
+	<select id="ex8_ls" title="Select a category">
+		<option>Help Desk</option>
+		<option>Customer Service</option>
+		<option>Knowledge Manager</option>
+		<option>Change Manager</option>
+		<option>Service Desk</option>
+		<option>Asset Manager</option>
+		<option>Software Manager</option>
+	</select>
+</p>
+
+
+<div class="change_log">
+	<h4>
+		Change Log
+	</h4>
+	<div id="change_log">
+	</div>
+</div>
+
+<div class="codeblock">
+	<h4>
+		Code
+	</h4>
+	
+	<code>
+		$("#ex8_ls").linkselect({<br />
+		&#160;&#160;change: function (li, value, text){<br />
+		&#160;&#160;&#160;&#160;$('&lt;div&gt;' + value + ' | ' + text + '&lt;/div&gt;').appendTo("#change_log");<br />
+		&#160;&#160;}<br />
+		});
+	</code>
+</div>
+
+<h2>
+	Example 9 - Add custom formatting
+</h2>
+
+<p>
+	The "format" option is a special callback you can define to easily add custom
+	formatting to the options in the dropdown menu. This allows you to add custom
+	HTML or change the classes for specific items. This is a great way to add
+	emphasis to key options.
+</p>
+
+<p>
+	The example below adds the array position of each option tag to the output
+	and highlights the "Customer Service" option.
+</p>
+
+<p>
+	<label for="ex9_ls">
+		Category:
+	</label>
+	<select id="ex9_ls" title="Select a category">
+		<option>Help Desk</option>
+		<option>Customer Service</option>
+		<option>Knowledge Manager</option>
+		<option>Change Manager</option>
+		<option>Service Desk</option>
+		<option>Asset Manager</option>
+		<option>Software Manager</option>
+	</select>
+</p>
+
+<div class="codeblock">
+	<h4>
+		Code
+	</h4>
+	
+	<code>
+		$("#ex9_ls").linkselect({<br />
+		&#160;&#160;format: function (html, value, label, pos){<br />
+		&#160;&#160;&#160;&#160;if( value == "Service Desk" ) html = '&lt;span style="font-weight: bold; color: #a72947;"&gt;' + html + '&lt;/span&gt;';<br />
+		&#160;&#160;&#160;&#160;return '&lt;span style="float: right;"&gt;' + pos + '&lt;/span&gt;' + html;<br />
+		&#160;&#160;}<br />
+		});
+	</code>
+</div>
+
+<h2 id="example10">
+	Example 10 - Customizable CSS
+</h2>
+
+<p>
+	The Linkselect can be fully customized by CSS. Use the buttons below to
+	change the look and feel of the Linkselect elements on the page.
+</p>
+
+<p>
+	<button title="linkselect" class="css_switcher">Default CSS</button>
+	<button title="selectbox" class="css_switcher">&quot;Select&quot; Style CSS</button>
+
+<!---	
+	<input type="button" value="Default CSS" onclick="switchCSS('default'); self.location.replace('#example10');" />
+	<input type="button" value="&quot;Select&quot; Style CSS" onclick="switchCSS('select'); self.location.replace('#example10');" />
+--->
+</p>
+
+<p>
+	<label for="ex10_ls">
+		Category:
+	</label>
+	<select id="ex10_ls" title="Select a category" class="linkselect">
+		<option>Help Desk</option>
+		<option>Customer Service</option>
+		<option>Knowledge Manager</option>
+		<option>Change Manager</option>
+		<option>Service Desk</option>
+		<option>Asset Manager</option>
+		<option>Software Manager</option>
+	</select>
+</p>
+
+<div class="codeblock">
+	<h4>
+		Code
+	</h4>
+	
+	<code>
+		Default: <a href="./css/jquery.linkselect.css">jquery.linkselect.css</a><br />
+		&quot;Select&quot; Style: <a href="./css/jquery.linkselect.style.select.css">jquery.linkselect.style.select.css</a>
+	</code>
+</div>
+
+<h2 id="example11">
+	Example 11 - Placeholder Text
+</h2>
+
+<p>
+	You can also use a placeholder text to show when no option has been selected
+</p>
+
+<p>
+	<label for="ex11_ls">
+		Category:
+	</label>
+	<select id="ex11_ls" class="linkselect">
+		<option class="placeholder">Select a category...</option>
+		<option>Help Desk</option>
+		<option>Customer Service</option>
+		<option>Knowledge Manager</option>
+		<option>Change Manager</option>
+		<option>Service Desk</option>
+		<option>Asset Manager</option>
+		<option>Software Manager</option>
+<!--
+-->
+		<option>Help Desk</option>
+		<option>Customer Service</option>
+		<option>Knowledge Manager</option>
+		<option>Change Manager</option>
+		<option>Service Desk</option>
+		<option>Asset Manager</option>
+		<option>Software Manager</option>
+	</select>
+</p>
+
+<p>
+	<input type="button" value="Get Text" onclick="alert($('#ex11_ls').linkselect('text'));" />
+</p>
+
+<h2>
+	Example 12 - Change Event
+</h2>
+
+<p>
+	You can also manually trigger the linkselect change event. 
+</p>
+
+<p>
+	<label for="ex12_ls">
+		Category:
+	</label>
+	<select id="ex12_ls" title="Select a category">
+		<option>Help Desk</option>
+		<option>Customer Service</option>
+		<option>Knowledge Manager</option>
+		<option>Change Manager</option>
+		<option>Service Desk</option>
+		<option>Asset Manager</option>
+		<option>Software Manager</option>
+	</select>
+</p>
+
+<p>
+	<input type="button" value="Change" onclick="$('#ex12_ls').linkselect('change');" />
+</p>
+
+<div class="change_log">
+	<h4>
+		Change Log
+	</h4>
+	<div id="change_log_change">
+	</div>
+</div>
+
+<div class="codeblock">
+	<h4>
+		Code
+	</h4>
+	
+	<code>
+		$("#ex12_ls").linkselect({<br />
+		&#160;&#160;style: style<br />
+		&#160;&#160;, init: function (){<br />
+		&#160;&#160;&#160;&#160;// trigger change events for the default value<br />
+		&#160;&#160;&#160;&#160;this.change();<br />
+		&#160;&#160;}<br />
+		&#160;&#160;, change: function (li, value, text){<br />
+		&#160;&#160;&#160;&#160;$('&lt;div&gt;' + value + ' | ' + text + '&lt;/div&gt;').appendTo("#change_log_change");<br />
+		&#160;&#160;}<br />
+		});
+	</code>
+</div>
+
+<br /><br /><br />
+<br /><br /><br />
+<br /><br /><br />
+<br /><br /><br />
+<br /><br /><br />
+<br /><br /><br />
+<br /><br /><br />
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>jQuery SelectBox plugin</title>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<link type="text/css" href="libs/jquery.linkselect/css/jquery.linkselect.css" rel="stylesheet" media="all" />
+		<script type="text/javascript" src="libs/jquery-1.8.0/jquery.js"></script>
+		<script type="text/javascript" src="libs/jquery.linkselect/lib/jquery.linkselect.js"></script>
+		<script type="text/javascript" src="libs/jquery.linkselect/lib/jquery.bgiframe.js"></script>
+		<script type="text/javascript">
+		$(function () {
+			
+			var init = false,
+				options = [
+						{value: "", text: "[none]"}
+					   ,{value: "1", text: "Option 1"}
+					  , {value: "2", text: "Option 2"}
+					  , {value: "3", text: "Option 3"} //  selected: true
+					  , {value: "4", text: "Option 4", className: "emphasis"}
+					  , {value: "5", text: "Option 5", className: "de-emphasis"}
+				  ];
+			
+			function getOption(callback) {
+				callback(options);
+			}
+			
+			function setOptions() {
+				$("#country_id").linkselect("replaceOptions", options, null, false);
+				init = true;
+				document.body.style.cursor = "default";
+				$("#country_id").linkselect("open");
+			}
+			
+			function show_progressbar(id) {
+				replace_html(id, '<img src="http://images.code-head.com/progress-bars/4.gif" border="0" alt="Loading, please wait..." />');
+			}			
+
+			function success_handler(o) {
+				replace_html('content', o.responseText);
+			}
+
+
+			$("#country_id").linkselect({
+				open: function (li, value, text){
+					if(!init) {
+						document.body.style.cursor = "wait";
+						setTimeout(function() {getOption(setOptions);},1250);
+					}
+				}
+			});
+		});
+		</script>
+	
+	</head>
+	<body>
+		<div>TODO write content</div>
+		
+		<select name="country_id" id="country_id" tabindex="1" title="Select a category" class="linkselect">
+			<option value="">[none]</option>
+			<option value="1">Option 1</option>
+		</select>
+		
+	</body>
+</html>

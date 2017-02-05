@@ -1,0 +1,208 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+http://threejs.org/examples/webgl_materials2.html
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script src="../js/libs/jquery-1.8.0/jquery.js" type="text/javascript"></script>
+	<script src="libs/three.min.js"></script>
+	
+	<script src="libs/fonts/optimer_font/optimer_bold.typeface.js"></script>
+	<script src="libs/fonts/optimer_font/optimer_regular.typeface.js"></script>
+    <script>
+	$(function() {
+	    var camera, scene, renderer;
+	    var geometry, material, mesh,
+		textMaterial, ballMaterial, textMesh1, textMesh2, mirror = true, group;
+
+	    init();
+	    animate();
+
+	    function init() {
+
+		camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
+		camera.position.z = 1000;
+
+		scene = new THREE.Scene();
+
+		geometry = new THREE.CubeGeometry( 100, 100, 100 );
+		material = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true } );
+
+		textMaterial = new THREE.MeshFaceMaterial( [ 
+			new THREE.MeshPhongMaterial( { color: 0xffffff, shading: THREE.FlatShading } ), // front
+			new THREE.MeshPhongMaterial( { color: 0xffffff, shading: THREE.SmoothShading } ) // side
+		] );
+
+		// BALL
+		var imgTexture2 = THREE.ImageUtils.loadTexture( "moon_1024.jpg" );
+		imgTexture2.wrapS = imgTexture2.wrapT = THREE.RepeatWrapping;
+		imgTexture2.anisotropy = 16;
+		var shininess = 50, specular = 0x333333, bumpScale = 1, shading = THREE.SmoothShading;
+		ballMaterial = new THREE.MeshPhongMaterial( { map: imgTexture2, bumpMap: imgTexture2, bumpScale: bumpScale, color: 0x000000, ambient: 0x000000, specular: 0xffaa00, shininess: shininess, metal: true, shading: shading } ) ;
+		var geometry_smooth = new THREE.SphereGeometry( 170, 32, 16 );
+		var geometry_flat = new THREE.SphereGeometry( 70, 32, 16 );
+
+
+		mesh = new THREE.Mesh( geometry, material );
+		
+		var pointLight = new THREE.PointLight(0xffffff, 10, 800  );
+		pointLight.position.set( 0, 100, 90 );
+		scene.add( pointLight );
+		scene.add( new THREE.AmbientLight( 0x404040  ) );
+		//pointLight.color.setHSL( Math.random(), 1, 0.5 );
+
+		var directionalLight = new THREE.DirectionalLight( 0xffffff, 120 );
+		directionalLight.position.set( 0, 1, 0 ).normalize();
+		scene.add( directionalLight );
+	
+		var ballGeometry = material.shading == THREE.FlatShading ? geometry_flat : geometry_smooth;
+
+		var sphere = new THREE.Mesh( ballGeometry, ballMaterial );
+		sphere.position.x = ( 1 % 4 ) * 200 - 100;
+		sphere.position.z = Math.floor( 1 / 4 ) * 300 - 300;
+		scene.add( sphere );
+		
+		
+		group = new THREE.Object3D();
+		group.position.y = 100;
+		scene.add( mesh );
+		scene.add( group );
+		createText();
+
+		renderer = new THREE.WebGLRenderer( { antialias: true } );
+		renderer.setSize( window.innerWidth, window.innerHeight );
+//		renderer.setClearColor( 0x0a0a0a, 1 );
+//		renderer.setClearColor( scene.fog.color, 1 );
+
+		document.body.appendChild( renderer.domElement );
+
+	    }
+
+	    function animate() {
+
+		// note: three.js includes requestAnimationFrame shim
+		requestAnimationFrame( animate );
+
+		mesh.rotation.x += 0.01;
+		mesh.rotation.y += 0.02;
+
+		renderer.render( scene, camera );
+
+	    }
+
+	    function createText() {
+
+		var text = "three.js",
+
+		    height = 20,
+		    size = 70,
+		    hover = 30,
+		    curveSegments = 4,
+
+		    bevelThickness = 2,
+		    bevelSize = 1.5,
+		    bevelSegments = 3,
+		    bevelEnabled = true,
+
+		    font = "optimer", // helvetiker, optimer, gentilis, droid sans, droid serif
+		    weight = "bold", // normal bold
+		    style = "normal",
+		    textGeo; // normal italic
+
+
+		textGeo = new THREE.TextGeometry( text, {
+
+			size: size,
+			height: height,
+			curveSegments: curveSegments,
+
+			font: font,
+			weight: weight,
+			style: style,
+
+			bevelThickness: bevelThickness,
+			bevelSize: bevelSize,
+			bevelEnabled: bevelEnabled,
+
+			material: 0,
+			extrudeMaterial: 1
+
+		});
+
+		textGeo.computeBoundingBox();
+		textGeo.computeVertexNormals();
+
+		// "fix" side normals by removing z-component of normals for side faces
+		// (this doesn't work well for beveled geometry as then we lose nice curvature around z-axis)
+
+		if ( ! bevelEnabled ) {
+
+			var triangleAreaHeuristics = 0.1 * ( height * size );
+
+			for ( var i = 0; i < textGeo.faces.length; i ++ ) {
+
+				var face = textGeo.faces[ i ];
+
+				if ( face.materialIndex === 1 ) {
+
+					for ( var j = 0; j < face.vertexNormals.length; j ++ ) {
+
+						face.vertexNormals[ j ].z = 0;
+						face.vertexNormals[ j ].normalize();
+					 }
+					 
+					var va = textGeo.vertices[ face.a ];
+					var vb = textGeo.vertices[ face.b ];
+					var vc = textGeo.vertices[ face.c ];
+					var s = THREE.GeometryUtils.triangleArea( va, vb, vc );
+
+					if ( s > triangleAreaHeuristics ) {
+						for ( var j = 0; j < face.vertexNormals.length; j ++ ) {
+							face.vertexNormals[ j ].copy( face.normal );
+						}
+					}
+				}
+			}
+		}
+
+		var centerOffset = -0.5 * ( textGeo.boundingBox.max.x - textGeo.boundingBox.min.x );
+
+		textMesh1 = new THREE.Mesh( textGeo, ballMaterial );
+
+		textMesh1.position.x = centerOffset;
+		textMesh1.position.y = hover;
+		textMesh1.position.z = -100;
+
+		textMesh1.rotation.x = 10;
+		textMesh1.rotation.y = Math.PI * 2;
+
+		group.add( textMesh1 );
+
+		if ( mirror ) {
+
+			textMesh2 = new THREE.Mesh( textGeo, material );
+
+			textMesh2.position.x = centerOffset;
+			textMesh2.position.y = -hover;
+			textMesh2.position.z = height;
+
+			textMesh2.rotation.x = Math.PI;
+			textMesh2.rotation.y = Math.PI * 2;
+
+			group.add( textMesh2 );
+
+		}
+
+	    }
+	
+	});
+    </script>	
+    </head>
+    <body>
+	<div>TODO write content</div>
+    </body>
+</html>

@@ -1,0 +1,126 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Javascript Editor</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<style type="text/css">
+			body {
+				overflow: hidden;
+			}
+			#editor {
+				
+				width: 700px;
+				height: 500px;
+			}
+		</style>
+		<script src="js/libs/ace-1.0.0/ace.js" type="text/javascript" charset="utf-8"></script>		
+		<script src="js/libs/ace-1.0.0/mode-javascript.js" type="text/javascript" charset="utf-8"></script>		
+		<script src="js/libs/ace-1.0.0/theme-twilight.js" type="text/javascript" charset="utf-8"></script>		
+		<script src="js/libs/jquery-2.0.3/jquery-2.0.3.js" type="text/javascript" charset="utf-8"></script>		
+		
+		<script src="js/libs/jquery-ui-1.10.3/ui/jquery-ui.js" type="text/javascript"></script>
+		<script src="js/libs/jquery-validation-1.11.1/jquery.validate.js" type="text/javascript"></script>
+		<script src="js/libs/i18next-1.6.3/i18next-1.6.3.js" type="text/javascript"></script>
+		
+		<script src="js/jdybase.js" type="text/javascript"></script>
+		<script src="js/jdymeta.js" type="text/javascript"></script>
+		<script src="js/jdyview.form.js" type="text/javascript"></script>
+		<script src="js/jdyview.tree.js" type="text/javascript"></script>
+		<script src="js/jdyapp.js" type="text/javascript"></script>
+		<script src="js/jdyi18n.js" type="text/javascript"></script>
+		<script src="js/jdymdl.taffy.js" type="text/javascript"></script>
+		
+		<link href="js/libs/jquery-ui-1.10.3/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" >
+		
+		<script>		
+			window.onload = function(){
+		
+				var editor = ace.edit("editor"), code;
+
+				$.i18n.init({ lng: "de", resStore: JDY.i18n.METADATA_RESOURCES });
+
+				function openForm(detailClass, service) {
+					"use strict";
+					var valObj,
+						saveCallback,
+						editForm,
+						dialog;
+
+					editForm = JDY.view.form.createDivFormForClassInfo(detailClass, service);
+					editForm.getForm().appendTo("body");
+					dialog = JDY.view.openDynamicFormDialog(editForm);
+
+					//valObj = service.createNewObject(detailClass);
+
+					//editForm.setValueObject(valObj);
+
+					dialog.dialog("open");
+
+				};
+
+
+		
+				function onRun(){
+					try
+					{	
+						var rep, typesClass, editForm, dialog;
+						document.getElementById( "lblError" ).innerHTML = "";
+						rep = eval( editor.getSession().getValue() );
+						
+						typesClass = rep.getClassInfo("Plant");
+						
+						openForm(typesClass)
+						
+						editor.focus();
+					}
+					catch( e )
+					{
+						document.getElementById("lblError").innerHTML = e.message;
+						editor.focus();
+					}
+				}
+				
+
+				editor.setTheme("ace/theme/twilight");
+				editor.getSession().setMode("ace/mode/javascript");
+				$( "#btnRun" ).click(function() {
+					onRun();
+				});				
+				
+				var jqxhr = $.get("example-resources/javascripteditor/plantShopRepo.js", null, null, "script")
+					.done(function(data) {
+						editor.setValue( data );
+					})
+					.fail(function(jqXHR, textStatus, errorThrown) {
+						alert( textStatus );
+					})
+					.always(function() {
+					});				
+				$.get( "example-resources/javascripteditor/plantShopRepo.js", function( data ) {
+						editor.setValue( data );
+				});
+			};
+		</script>		
+	</head>
+	<body>
+		<div>Javascript editor</div>
+		<div id="editor"></div>
+		<div id="messages">
+			<div id="log">
+			<div class="clsScrollTable" id="messageContainer">
+			<table cellpadding="0" cellspacing="0" border="0" width="100%" id="messageLog"></table>
+			</div>
+		</div>
+		<div id="msg_divider"></div>
+		<div id="lblError"></div>
+		</div>		
+		<div id="buttons">
+			<input type="button" value="Run" id="btnRun">
+		</div>
+		
+	</body>
+</html>

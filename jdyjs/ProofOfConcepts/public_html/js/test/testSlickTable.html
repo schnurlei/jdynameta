@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Value Model Table</title>
+	<link rel="stylesheet" href="analyse/libs/SlickGrid-master/slick.grid.css" type="text/css"/>
+	<link rel="stylesheet" href="analyse/libs/SlickGrid-master/css/smoothness/jquery-ui-1.8.16.custom.css" type="text/css"/>
+	<link rel="stylesheet" href="analyse/libs/SlickGrid-master/examples/examples.css" type="text/css"/>
+
+	<script src="js/libs/jquery-1.8.0/jquery.js" type="text/javascript"></script>
+	<script src="js/libs/jqueryui-1.9.1/jquery-ui-1.9.1.custom.js" type="text/javascript"></script>
+	<script src="js/libs/jquery-validation-1.10.0/dist/jquery.validate.js" type="text/javascript"></script>
+	<script src="analyse/libs/SlickGrid-master/lib/jquery.event.drag-2.2.js"></script>
+	<script src="analyse/libs/SlickGrid-master/slick.core.js"></script>
+	<script src="analyse/libs/SlickGrid-master/plugins/slick.cellrangeselector.js"></script>
+	<script src="analyse/libs/SlickGrid-master/plugins/slick.cellselectionmodel.js"></script>
+	<script src="analyse/libs/SlickGrid-master/slick.formatters.js"></script>
+	<script src="analyse/libs/SlickGrid-master/slick.editors.js"></script>
+	<script src="analyse/libs/SlickGrid-master/slick.grid.js"></script>
+	<script src="analyse/libs/SlickGrid-master/examples/slick.compositeeditor.js"></script>	
+	<script src="analyse/libs/SlickGrid-master/slick.dataview.js"></script>	
+
+	<script src="../../main/resources/js/jdybase.js" type="text/javascript"></script>
+	<script src="../../main/resources/js/jdyview.js" type="text/javascript"></script>
+	<script src="../../main/resources/js/jdyview.filter.js"></script>
+	<script src="../../main/resources/js/jdyview.slickgrid.js"></script>
+	<script src="js/jdytest.js" type="text/javascript"></script>
+	
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
+	
+	
+    <script>
+		
+		var rep = JDYTEST.meta.createTestRepository(),
+			testViewModel = new JDY.base.TypedValueObject(rep.getClassInfo("AllAttributeTypes")),
+			testViewModel2 = new JDY.base.TypedValueObject(rep.getClassInfo("AllAttributeTypes"));
+			dialog = null,
+			valueList = [];
+
+		testViewModel.IntegerData = 12;
+		testViewModel.BooleanData = true;
+		testViewModel.ClobData = 'Clob data';
+		testViewModel.CurrencyData = 4.9;
+		testViewModel.DateData = null;
+		testViewModel.FloatData = 77.89;
+		testViewModel.LongData = 29;
+		testViewModel.TextData = 'text data';
+		testViewModel.TimestampData = null;
+		testViewModel.TimeData = null;
+		testViewModel.VarCharData = 'VarCharData';
+
+		testViewModel2.IntegerData = 20;
+		testViewModel2.BooleanData = true;
+		testViewModel2.ClobData = 'Clob data2';
+		testViewModel2.CurrencyData = 2.1;
+		testViewModel2.DateData =  new Date();
+		testViewModel2.FloatData = 2.2;
+		testViewModel2.LongData = 23;
+		testViewModel2.TextData = 'text data2';
+		testViewModel2.TimestampData =  new Date();
+		testViewModel2.TimeData =  new Date();
+		testViewModel2.VarCharData = 'VarCharData2';
+		
+		valueList.push(testViewModel); 
+		valueList.push(testViewModel2); 
+
+
+
+		$(document).ready(function() {
+			var valueTable = JDY.view.slick.createTableForClassInfo($("#divTable"), rep.getClassInfo("AllAttributeTypes"),valueList),
+				filterElem = JDY.view.createDivFilterForClassInfo(rep.getClassInfo("AllAttributeTypes"));
+			
+			filterElem.getFilterElemJquery().appendTo( "body" );
+			//valueTable.setValues(valueList);
+		});
+            
+            
+    </script>	
+</head>
+<body>
+		<div id="divTable">
+		</div>
+
+</body>
+</html>

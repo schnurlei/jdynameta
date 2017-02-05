@@ -1,0 +1,252 @@
+/* 
+    Document   : appPanel
+    Created on : 26.08.2013, 21:33:55
+    Author     : rainer
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+body {
+	font-family: "Trebuchet MS","Helvetica","Arial","Verdana","sans-serif";
+	font-size: 62.5%;
+}			
+
+
+h2 {
+	margin: 0px;
+	padding: 0px;
+	border-bottom: 1px solid black;
+	font-size: 14px;
+	display:block;
+	padding: 10px;
+	margin: 10px;
+}
+nav#appmenu
+{
+  width: 100%;
+  float:left;
+}
+
+nav#appmenu ul li
+{
+    border:0px solid black;
+    font: medium Georgia, "Times New Roman";
+    background: #2175BC;
+    border-radius: 10px;
+    padding:8px;
+    margin: 4px 4px 4px 4px;
+} 
+
+nav#appmenu ul li
+{
+    color: #473215;
+    font: small Georgia, "Times New Roman";
+    background: #f4f1e6;
+ 
+} 
+
+ul
+{
+	list-style-type:none;
+
+}
+li
+{
+	float:left; position:relative;  display:block;
+	border:1px solid black;
+	border-style:inset;			
+}
+li ul {
+    display:none;
+	position:absolute;
+}
+li:hover ul{
+	    display:block;
+	    background:#f4f1e6;
+		height:auto; 
+		width:8em;
+		border:0px solid black;
+		z-index:2; 
+}
+li ul li{
+    clear:both;
+	border-style:none;
+}
+
+
+.jdyInsertExpr, .jdyInsert {
+    padding: 5px 10px 5px 25px;
+    border: solid 1px #8AB134;
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    background: linear-gradient( 180deg, whitesmoke  40%, #e2eeab );  
+    background-image: url("images/PNG/Add Green Button.png");  
+	background-repeat: no-repeat;
+	background-position: -5px -5px;
+    font-size: 11px;
+    height: 25px;
+    text-decoration: none;
+    color: #40740D;
+    border-radius: 10px;
+}
+
+.jdyRemoveAll, .jdyReload {
+    padding: 4px 10px 3px 25px;
+    border: solid 1px #8AB134;
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    background: linear-gradient( 180deg, whitesmoke  40%, #e2eeab );  
+	background-repeat: no-repeat;
+	background-position: -5px -5px;
+    font-size: 11px;
+    height: 25px;
+    text-decoration: none;
+    color: #40740D;
+    border-radius: 10px;
+}
+
+.jdyRemoveAll {
+    background-image: url("images/PNG/Minus Red Button.png");  
+}
+
+.jdyReload {
+    background-image: url("images/PNG/Backup Green Button.png");  
+}
+
+
+.jdyDelete {
+    padding: 4px;
+    border: solid 0px #8AB134;
+    cursor: pointer;
+    background-image: url("images/PNG/Minus Green Button.png");  
+	background-repeat: no-repeat;
+	background-position: 0px -4px;
+	background-color: #e2eeab;
+    font-size: 0px;
+    height: 35px;
+	width: 30px;
+    text-decoration: none;
+    color: #40740D;
+}
+
+
+.jdyInsertExpr:hover .jdyRemoveAll:hover {
+    color: #8AB134;
+}  
+
+
+
+div#filter {
+    background: #e2eeab;
+    width: 100%;
+    position: relative;
+    top:100px; left:0px;
+	padding: 10px;
+}
+
+div#table {
+    background:#e2eeab;
+    width: 100%;
+    position: relative;
+    top:150px; left:0px;
+}
+
+.jdyFilterActions {
+	
+	padding-bottom: 10px;
+}
+.jdyFilterExpr {
+
+   height: 30px;
+   margin: 0px;
+   padding: 0px;
+
+}
+
+.jdyAttrSelectDiv {
+    background-color: #8AB134;
+    border-radius: 20px 20px 20px 20px;
+    margin: 0px;
+	padding: 0px;
+    width: 230px;
+	display:inline;
+	padding: 6px;
+	overflow: hidden;
+	border: 0px hidden transparent;
+}
+
+.jdyAttrSelect {
+	color: rgb(255, 255, 255);
+	background:  no-repeat scroll 0 transparent;
+    font-size: 12px;
+	height: 15px;
+    padding-right: 0px;
+	margin-right: 0px;
+    width: 250px;	
+	border: 0px hidden transparent;
+}
+
+.jdyOpSelectDiv {
+    background-color: #8AB134;
+    border-radius: 20px 20px 20px 20px;
+	display:inline;
+	padding: 5px;
+}
+
+.jdyOpSelect {
+	color: rgb(255, 255, 255);
+	background: no-repeat scroll 50% 0 transparent;
+    border: transparent none;
+	height: 15px;
+    font-size: 14px;
+}
+
+
+option {
+	height: 20px;
+	border: 0px hidden transparent;
+    background-color: #8AB134;
+}
+
+
+
+#table
+{
+font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+width:100%;
+border-collapse:collapse;
+}
+#table td, #table th, #table table thead tr th.jdyTblLbl
+{
+font-size:1em;
+border:1px solid #98bf21;
+padding:3px 7px 2px 7px;
+}
+#table th 
+{
+font-size:1.1em;
+text-align:left;
+padding-top:5px;
+padding-bottom:4px;
+background-color:#A7C942;
+color:#ffffff;
+}
+#table tr.alt td 
+{
+color:#000000;
+background-color:#EAF2D3;
+}
+
+label.jdyLbl {
+	float: left;
+	width: 150px;
+	text-align: left;
+	padding-top: 3px;
+	padding-right: 5px;
+}

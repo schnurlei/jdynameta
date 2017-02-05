@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Analyse Knockout</title>
+	<style type="text/css">
+		table {
+			table-layout: fixed;
+			border-collapse: collapse;
+			border: 1px solid black;
+			width: 0; /* otherwise Chrome will not increase table size */
+		}
+
+		tr.last td {
+			border-bottom: 1px solid black;
+		}
+
+		th {
+			border-right: 1px solid black;
+			border-bottom: 1px solid black;
+			position: relative;
+		}
+
+		th.last {
+			border-right: none;
+		}
+
+		th, td {
+			padding: 2px 5px;
+			text-align: left;
+			overflow: hidden;
+		}
+
+		/*
+		resizable columns
+		*/
+		.scrollContainer {
+			overflow: auto;
+			width: 700px;
+			height: 100%;
+		}
+
+		.resizeHelper,.ui-resizable-e {
+			cursor: e-resize;
+			width: 10px;
+			height: 100%;
+			top: 0;
+			right: -8px;
+			position: absolute;
+			z-index: 100;
+		}
+
+		/* handle for FF */
+		@-moz-document url-prefix() {
+			.resizeHelper,.ui-resizable-e {
+				position: relative;
+				float: right;
+			}
+		}
+	</style>
+
+	
+	<script src="../js/libs/jquery-1.8.0/jquery.js" type="text/javascript"></script>
+	<script src="../js/libs/jqueryui-1.9.1/jquery-ui-1.9.1.custom.js" type="text/javascript"></script>
+	
+	
+    <script>
+		// http://ihofmann.wordpress.com/2012/07/31/resizable-table-columns-with-jquery-ui/
+		$(function() {
+			(function($) {
+
+				/**
+				 * Widget makes columns of a table resizable.
+				 */
+				$.widget("ih.resizableColumns", {
+
+					/**
+					 * initializing columns
+					 */
+					_create: function() {
+						this._initResizable();
+					},
+
+					/**
+					 * init jQuery UI sortable
+					 */
+					_initResizable: function() {
+
+						var colElement, colWidth, originalSize;
+						var table = this.element;
+
+						this.element.find("th").resizable({
+							// use existing DIV rather than creating new nodes
+							handles: {
+								"e": " .resizeHelper"
+							},
+
+							// default min width in case there is no label
+							minWidth: 10,
+
+							// set min-width to label size
+							create: function(event, ui) {
+								var minWidth = $(this).find(".columnLabel").width();
+								if (minWidth) {
+
+									// FF cannot handle absolute resizable helper
+									if ($.browser.mozilla) {
+										minWidth += $(this).find(".ui-resizable-e").width();
+									}
+
+									$(this).resizable("option", "minWidth", minWidth);
+								}
+							},
+
+							// set correct COL element and original size
+							start: function(event, ui) {
+								var colIndex = ui.helper.index() + 1;
+								colElement = table.find("colgroup > col:nth-child(" + colIndex + ")");
+								colWidth = parseInt(colElement.get(0).style.width, 10); // faster than width
+								originalSize = ui.size.width;
+							},
+
+							// set COL width
+							resize: function(event, ui) {
+								var resizeDelta = ui.size.width - originalSize;
+
+								var newColWidth = colWidth + resizeDelta;
+								colElement.width(newColWidth);
+
+								// height must be set in order to prevent IE9 to set wrong height
+								$(this).css("height", "auto");
+							}
+						});
+					}
+
+				});
+
+				// init resizable
+				$(".resizable").resizableColumns();
+			})(jQuery);
+		});
+    </script>	
+</head>
+<body>
+   <div class="scrollContainer">
+    <table class="resizable">
+        <caption>Data Table with resizable columns</caption>
+        <colgroup>
+            <col style="width: 100px"/>
+            <col style="width: 150px"/>
+            <col style="width: 100px"/>
+            <col style="width: 100px"/>
+            <col style="width: 100px"/>
+            <col style="width: 100px"/>
+        </colgroup>
+        <thead>
+            <tr class="colHeaders">
+                <th class="ui-resizable">
+                    <span class="columnLabel">Column 1</span>
+                    <span class="resizeHelper ui-resizable-handle ui-resizable-e">&nbsp;</span>
+                </th>
+                <th class="ui-resizable">
+                    <span class="columnLabel">Column 2</span>
+                    <span class="resizeHelper ui-resizable-handle ui-resizable-e">&nbsp;</span>
+                </th>
+                <th class="ui-resizable">
+                    <span class="columnLabel">Column 3</span>
+                    <span class="resizeHelper ui-resizable-handle ui-resizable-e">&nbsp;</span>
+                </th>
+                <th class="ui-resizable">
+                    <span class="columnLabel">Column 4</span>
+                    <span class="resizeHelper ui-resizable-handle ui-resizable-e">&nbsp;</span>
+                </th>
+                <th class="ui-resizable">
+                    <span class="columnLabel">Column 5</span>
+                    <span class="resizeHelper ui-resizable-handle ui-resizable-e">&nbsp;</span>
+                </th>
+                <th class="ui-resizable last">
+                    <span class="columnLabel">Column 6</span>
+                    <span class="resizeHelper ui-resizable-handle ui-resizable-e">&nbsp;</span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Column 1</td>
+                <td>Column 2</td>
+                <td>Column 3</td>
+                <td>Column 4</td>
+                <td>Column 5</td>
+                <td>Column 6</td>
+            </tr>
+            <tr>
+                <td>Column 1</td>
+                <td>Column 2</td>
+                <td>Column 3</td>
+                <td>Column 4</td>
+                <td>Column 5</td>
+                <td>Column 6</td>
+            </tr>                    
+            <tr>
+                <td>Column 1</td>
+                <td>Column 2</td>
+                <td>Column 3</td>
+                <td>Column 4</td>
+                <td>Column 5</td>
+                <td>Column 6</td>
+            </tr>                    
+            <tr>
+                <td>Column 1</td>
+                <td>Column 2</td>
+                <td>Column 3</td>
+                <td>Column 4</td>
+                <td>Column 5</td>
+                <td>Column 6</td>
+            </tr>                    
+            <tr>
+                <td>Column 1</td>
+                <td>Column 2</td>
+                <td>Column 3</td>
+                <td>Column 4</td>
+                <td>Column 5</td>
+                <td>Column 6</td>
+            </tr>                    
+            <tr class="last">
+                <td>Column 1</td>
+                <td>Column 2</td>
+                <td>Column 3</td>
+                <td>Column 4</td>
+                <td>Column 5</td>
+                <td>Column 6</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+	
+</body>
+</html>

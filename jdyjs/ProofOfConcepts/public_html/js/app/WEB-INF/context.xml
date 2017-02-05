@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context antiJARLocking="true" path="/TestWEB">
+           <Resource name="jdbc/testdb"
+               auth="Container"
+               type="javax.sql.DataSource"
+               maxActive="100"
+               maxIdle="30"
+               maxWait="10000"
+               maxReconnects="10"
+               initialTimeout="10"
+               username="sa"
+               password=""
+               driverClassName="org.hsqldb.jdbcDriver"
+               validationQuery="SELECT DISTINCT 1 FROM &quot;Tabelle1&quot;;"
+               autoReconnect="true"
+               url="jdbc:hsqldb:res:/database/testdb"
+ url="jdbc:hsqldb:hsql://localhost:1747/juddi"
+                />
+</Context>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+    <WatchedResource>WEB-INF/web.xml</WatchedResource>
+    <!-- HSQL data source -->
+    <Resource name="jdbc/JuddiDS" auth="Container"
+            type="javax.sql.DataSource" username="JUDDI" password="password"
+            driverClassName="org.hsqldb.jdbcDriver"
+            url="jdbc:hsqldb:hsql://localhost:1747/juddi"
+            maxActive="8"
+            />
+</Context>
+
+<!-- url="jdbc:hsqldb:res:/database/testdb" -->
+<!-- url="jdbc:hsqldb:file:/home/thom/Dokumente/NetBeansProjekts/TestWEB/web/WEB-INF/classes/database/testdb" -->

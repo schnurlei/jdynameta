@@ -1,0 +1,49 @@
+<!doctype html>
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>jQuery UI Accordion - Default functionality</title>
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
+		<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+		<script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
+		<script src="../../../main/resources/js/libs/taffydb-master/taffy.js"></script>		
+		
+		<link rel="stylesheet" href="/resources/demos/style.css" />
+		<script>
+			$(function() {
+			    
+			    var friend_db, taffy_map,
+				key_name, data_val, msg_text, var_type;
+
+			    
+			    getFriendList = function () {
+			       return [
+				 {"id":1,"gender":"M","first":"John","last":"Smith",
+				   "city":"Seattle, WA","status":"Active"},
+				 {"id":2,"gender":"F","first":"Kelly","last":"Ruth",
+				   "city":"Dallas, TX","status":"Active"},
+				 {"id":3,"gender":"M","first":"Jeff","last":"Stevenson",
+				   "city":"Washington, D.C.","status":"Active"},
+				 {"id":4,"gender":"F","first":"Jennifer","last":"Gill",
+				   "city":"Seattle, WA","status":"Active"}  
+			       ];
+			    };				
+			    
+			    friend_db = TAFFY( getFriendList() );
+			    // data_val = friend_db({ city : {is:"Seattle, WA"}}).get();
+			    data_val = friend_db({ id : {is:1}}).get();
+			    console.log(data_val);
+
+			});
+			
+			
+		</script>
+	</head>
+	<body>
+
+		<div id="dynatabs">
+		</div>
+
+	</body>
+</html>

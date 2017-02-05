@@ -1,0 +1,36 @@
+<HTML>
+<HEAD>
+<TITLE>Image Map Event Handling</TITLE>
+<SCRIPT LANGUAGE="JavaScript"><!--
+firstTimeOnHead = true
+
+function onHead() {
+ if(firstTimeOnHead) {
+  alert("You're on my head!")
+  firstTimeOnHead=false
+ }
+}
+function myEye() {
+ alert("myEye!")
+}
+function myNose() {
+ alert("myNose")
+}
+function myMouth() {
+ alert("myMouth!")
+}
+//-->
+</SCRIPT>
+</HEAD>
+<BODY>
+<H1>Image Map Event Handling</H1>
+<IMG SRC="http://www.java2s.com/style/logo.png" USEMAP="#blockman">
+<MAP NAME="blockman">
+<AREA COORDS="80,88,120,125" HREF="A.htm" onMouseOver="myEye()">
+<AREA COORDS="169,88,208,125" HREF="B.htm" onMouseOver="myEye()">
+<AREA COORDS="124,147,165,181" HREF="C.htm" onMouseOut="myNose()">
+<AREA COORDS="92,210,192,228" HREF="D.htm" onMouseOut="myMouth()">
+<AREA COORDS="6,4,292,266" HREF="E.htm" onMouseOver="onHead()">
+</MAP>
+</BODY>
+</HTML>

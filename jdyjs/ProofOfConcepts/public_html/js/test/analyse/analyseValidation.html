@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Analyse Validation</title>
+
+	<script src="../js/libs/jquery-1.8.0/jquery.js" type="text/javascript"></script>
+	<script src="../js/libs/jqueryui-1.9.1/jquery-ui-1.9.1.custom.js" type="text/javascript"></script>
+	<script src="../js/libs/jquery-validation-1.10.0/dist/jquery.validate.js" type="text/javascript"></script>
+
+	<script src="../../../main/resources/js/jdybase.js" type="text/javascript"></script>
+	<script src="../js/jdytest.js" type="text/javascript"></script>
+	
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
+	
+	
+    <script>
+		$(function() {
+
+			var newElem = $("<input>");
+			$("#commentForm").validate();
+			$("#commentForm").append(newElem);
+			newElem.rules("add", {
+				maxlength: 4
+			});
+		   $("#cemail").rules("add", {
+				maxlength: 4
+			});
+		});
+    </script>	
+</head>
+<body>
+	
+	<form class="cmxform" id="commentForm" method="get" action="">
+	<fieldset>
+	  <legend>A simple comment form with submit validation and default messages</legend>
+	  <p>
+		<label for="cname">Name</label>
+		<em>*</em><input id="cname" name="name" size="25" class="required" minlength="2" />
+	  </p>
+	  <p>
+		<label for="cemail">E-Mail</label>
+		<em>*</em><input id="cemail" name="email" size="25"   />
+	  </p>
+	  <p>
+		<label for="curl">URL</label>
+		<em>  </em><input id="curl" name="url" size="25"  class="url" value="" />
+	  </p>
+	  <p>
+		<label for="ccomment">Your comment</label>
+		<em>*</em><textarea id="ccomment" name="comment" cols="22"  class="required"></textarea>
+	  </p>
+	  <p>
+		<input class="submit" type="submit" value="Submit"/>
+	  </p>
+	</fieldset>
+	</form>
+
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!doctype html>
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>jQuery UI Accordion - Default functionality</title>
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
+		<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+		<script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
+		<link rel="stylesheet" href="/resources/demos/style.css" />
+		<script>
+			$(function() {
+				
+				var dynTabDiv = $("<div>"),
+					ulElem = $("<ul>").appendTo(dynTabDiv),
+					tabs = ["ois", "zwoi", "drei"],
+					i;
+				
+				for( i= 0; i< tabs.length; i++) {
+					
+					$("<span>").text(tabs[i]).appendTo($("<a>").attr("href", tabs[i]).appendTo($("<li>").appendTo(ulElem)));
+				}
+				
+				dynTabDiv.tabs({
+						cache: true,
+						beforeActivate: function( event, ui ) {
+							console.log("beforeActivate");
+						},
+						create: function( event, ui ) {
+							console.log("creat2");
+						},
+						load: function( event, ui ) {
+							console.log("load");
+						},
+						beforeLoad: function( event, ui ) {
+							if ( ui.tab.data( "loaded" ) ) {
+								console.log("beforeLoad:loaded ");
+								event.preventDefault();
+								return;
+							} else {
+								console.log("beforeLoad: "  + ui.ajaxSettings.url);
+								ui.panel.append("<div>").text("hans"+i++);
+								ui.tab.data( "loaded", true );
+							}
+
+						}
+				});
+				
+				dynTabDiv.appendTo("body");
+				
+				$("#tabs").tabs();
+			});
+		</script>
+	</head>
+	<body>
+
+		<div id="dynatabs">
+		</div>
+		
+		<div id="tabs">
+			<ul>
+				<li><a href="#fragment-1"><span>One</span></a></li>
+				<li><a href="#fragment-2"><span>Two</span></a></li>
+				<li><a href="#fragment-3"><span>Three</span></a></li>
+			</ul>
+			<div id="fragment-1">
+				<p>First tab is active by default:</p>
+				<pre><code>$( "#tabs" ).tabs(); </code></pre>
+			</div>
+			<div id="fragment-2">
+				Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+				Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+			</div>
+			<div id="fragment-3">
+				Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+				Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+				Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+			</div>
+		</div>
+
+	</body>
+</html>

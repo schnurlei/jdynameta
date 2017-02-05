@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+	<head>
+		<title>Taffy Insert Test</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width">
+		<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+		<script src="http://code.jquery.com/qunit/qunit-1.12.0.js"></script>
+		<script src="https://raw.github.com/typicaljoe/taffydb/master/taffy-min.js"></script>
+		<link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.12.0.css">
+		<script src="../../../main/resources/js/libs/taffydb-master/taffy.js"></script>
+		
+		
+		<script>
+			$(function() {
+				
+				test(" JDY.taffy.insertTest", function () {
+					"use strict";
+					
+					var friends = TAFFY([
+						{"keyLevel1":1, "valueLevel1": "level1", 
+							"level2":{"keyLevel2":2, "valueLevel2": "level2",
+								"level3":{"keyLevel3":3, "valueLevel3": "level3"}}}
+					]);
+					equal(friends({keyLevel1:1}).count(), 1);	
+					equal(friends({keyLevel1:1, level2:{"keyLevel2":2}}).count(), 1);	
+					equal(friends({keyLevel1:1, level2:{"keyLevel2":2}}).count(), 1);	
+					equal(friends({keyLevel1:1, level2:{"keyLevel2":2, level3:{"keyLevel3":3}}}).count(), 1);	
+				});
+					
+				
+			});
+				
+		</script>
+	</head>
+	<body>
+		<div id="qunit"></div>
+	</body>
+</html>
